@@ -9,7 +9,7 @@ Tested:
 	✔	Pixeden_Extractor @done (17-08-14 10:14)
 	✔	Icomoon_App_Extractor, need tests more @done (17-08-14 10:34)
 	✔	Typicons_Extractor @done (17-08-14 10:42)
-	✔	Mapicons_Extractor @done (17-08-14 10:54)
+	✔	Mapicons_Extractor http://map-icons.com/ @done (17-08-14 10:54)
 
 TODO Support:
 
@@ -18,3 +18,4 @@ TODO Support:
 
 TODO:
 	☐	Write unit-tests
+	☐	Make register icon can be deactive, active.

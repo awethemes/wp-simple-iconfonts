@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name:     WP Simple Iconfonts
- * Plugin URI:      PLUGIN SITE HERE
- * Description:     PLUGIN DESCRIPTION HERE
+ * Plugin URI:      https://github.com/awethemes/wp-simple-iconfonts
+ * Description:     A dead simple, icon fonts for WordPress Edit
  * Author:          awethemes
- * Author URI:      YOUR SITE HERE
+ * Author URI:      https://awethemes.com/
  * Text Domain:     wp_simple_iconfonts
  * Domain Path:     /languages
  * Version:         0.1.0
@@ -52,13 +52,3 @@ if ( ! class_exists( 'WP_Simple_Iconfonts\\Iconfonts' ) ) :
 	// Share main class into global variable.
 	$GLOBALS['wp_simple_iconfonts'] = new WP_Simple_Iconfonts\Iconfonts;
 endif;
-
-function wpdocs_register_meta_boxes() {
-    add_meta_box( 'meta-box-id', __( 'My Meta Box', 'textdomain' ), 'wpdocs_my_display_callback', 'post' );
-}
-add_action( 'add_meta_boxes', 'wpdocs_register_meta_boxes' );
-function wpdocs_my_display_callback( $post ) {
-     wp_simple_iconfonts_field([
-		'id' => 'a',
-	]);
-}
