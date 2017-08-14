@@ -29,20 +29,20 @@ msgstr ""
 msgid "This icon pack will be lost in your system. Are you sure want to do this?"
 msgstr ""
 
-#: inc/Iconfonts.php:398
+#: inc/Iconfonts.php:401
 msgid "Icon Picker"
 msgstr ""
 
-#: inc/Iconfonts.php:399
+#: inc/Iconfonts.php:402
 msgid "All"
 msgstr ""
 
-#: inc/Iconfonts.php:400
+#: inc/Iconfonts.php:403
 msgid "Select Icon"
 msgstr ""
 
-#: inc/Iconfonts.php:413, inc/Iconfonts.php:414
-msgid "Font Icons"
+#: inc/Iconfonts.php:416, inc/Iconfonts.php:417
+msgid "Icon Fonts"
 msgstr ""
 
 #: inc/Installer.php:37
