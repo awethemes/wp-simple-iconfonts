@@ -12,7 +12,10 @@ class Upload_Iconpack extends Iconpack {
 			return;
 		}
 
-		$metadata = file_get_contents( wp_simple_iconfonts()->get_path( 'icons_dir' ) . $id . '/metadata.json' );
+		$metadata = file_get_contents(
+			wp_simple_iconfonts()->get_path( 'icons_dir' ) . $id . '/metadata.json'
+		);
+
 		$args = json_decode( $metadata, true );
 
 		parent::__construct( $args );
