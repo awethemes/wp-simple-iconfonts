@@ -1,0 +1,64 @@
+<?php
+/**
+ * Plugin Name:     WP Simple Iconfonts
+ * Plugin URI:      PLUGIN SITE HERE
+ * Description:     PLUGIN DESCRIPTION HERE
+ * Author:          awethemes
+ * Author URI:      YOUR SITE HERE
+ * Text Domain:     wp_simple_iconfonts
+ * Domain Path:     /languages
+ * Version:         0.1.0
+ *
+ * @package         WP_Simple_Iconfonts
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	die( 'Silence is golden.' );
+}
+
+/**
+ * Plugin works only with PHP 5.3.9 or later.
+ */
+if ( version_compare( phpversion(), '5.3.9', '<' ) ) {
+	/**
+	 * Adds a message for outdate PHP version.
+	 */
+	function wp_simple_iconfonts_php_upgrade_notice() {
+		$message = sprintf( esc_html__( 'WP Simple Iconfonts requires at least PHP version 5.3.9 to works, you are running version %s. Please contact to your administrator to upgrade PHP version!', 'wp_simple_iconfonts' ), phpversion() );
+		printf( '<div class="error"><p>%s</p></div>', $message ); // WPCS: XSS OK.
+	}
+	add_action( 'admin_notices', 'wp_simple_iconfonts_php_upgrade_notice' );
+
+	deactivate_plugins( array( 'wp-simple-iconfonts/wp-simple-iconfonts.php' ) );
+	return;
+}
+
+if ( ! class_exists( 'WP_Simple_Iconfonts\\Iconfonts' ) ) :
+	define( 'WP_SIMPLE_ICONFONTS_PATH', __FILE__ );
+
+	// First, require the autoloader.
+	require trailingslashit( __DIR__ ) . 'autoload.php';
+	require trailingslashit( __DIR__ ) . 'inc/functions.php';
+
+	/**
+	 * Get the Iconfonts object instance.
+	 *
+	 * @return WP_Simple_Iconfonts\Iconfonts
+	 */
+	function wp_simple_iconfonts() {
+		return WP_Simple_Iconfonts\Iconfonts::get_instance();
+	}
+
+	// Share main class into global variable.
+	$GLOBALS['wp_simple_iconfonts'] = new WP_Simple_Iconfonts\Iconfonts;
+endif;
+
+function wpdocs_register_meta_boxes() {
+    add_meta_box( 'meta-box-id', __( 'My Meta Box', 'textdomain' ), 'wpdocs_my_display_callback', 'post' );
+}
+add_action( 'add_meta_boxes', 'wpdocs_register_meta_boxes' );
+function wpdocs_my_display_callback( $post ) {
+     wp_simple_iconfonts_field([
+		'id' => 'a',
+	]);
+}

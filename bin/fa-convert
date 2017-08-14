@@ -1,0 +1,56 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * FA-Convert
+ * Convert Font-Awesome JSON Format to Awecontent JSON Format.
+ *
+ * Usage: php fa-convert <input.json> <output.json>
+ *
+ * How we can get a input.json (Font-Awesome JSON Format) file?
+ *
+ * 1. Get all icons (yaml format) of Font-Awesome
+ * 	  at: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/src/icons.yml.
+ * 2. Copy icons.yml contents then convert YAML to JSON
+ *    by this tool http://codebeautify.org/yaml-to-json-xml-csv.
+ * 3. Save JSON content as input.json or whatever name.
+ */
+
+$input = isset( $argv[1] ) ? $argv[1] : null;
+$output = isset( $argv[2] ) ? $argv[2] : null;
+
+if ( empty( $input ) || empty( $output ) ) {
+	echo "Invalid arguments!\n";
+	echo "Usage: php fa-convert <input.json> <output.json>\n";
+	return;
+}
+
+if ( ! file_exists( $input ) ) {
+	echo "Input file is not exists!\n";
+	return;
+}
+
+$json = @json_decode( file_get_contents( $input ), true );
+$build_icons = array();
+
+if ( empty( $json['icons'] ) ) {
+	echo "Invalid JSON format!\n";
+	return;
+}
+
+foreach (  $json['icons'] as $icon ) {
+	if ( empty( $icon['id'] ) && empty( $icon['name'] ) ) {
+		continue;
+	}
+
+	$build_icons[] = array(
+		'name' => $icon['name'],
+		'classes' => 'fa fa-' . $icon['id']
+	);
+}
+
+if ( ! file_exists( $output ) ) {
+	file_put_contents( $output, json_encode( $build_icons ) );
+} else {
+	echo "Output file exists, write failed!\n";
+}

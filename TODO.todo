@@ -1,0 +1,20 @@
+Tested:
+	✔	Elusive_Extractor @done (17-08-14 01:44)
+	✔	Fontawesome_Extractor @done (17-08-14 02:52)
+	✔	Fontello_Extractor, need tests more @done (17-08-14 02:52)
+	✔	Foundation_Extractor @done (17-08-14 03:03)
+	✔	Ionicons_Extractor @done (17-08-14 03:13)
+	✔	Paymentfont_Extractor @done (17-08-14 03:56)
+	✔	Themify_Extractor @done (17-08-14 10:11)
+	✔	Pixeden_Extractor @done (17-08-14 10:14)
+	✔	Icomoon_App_Extractor, need tests more @done (17-08-14 10:34)
+	✔	Typicons_Extractor @done (17-08-14 10:42)
+	✔	Mapicons_Extractor @done (17-08-14 10:54)
+
+TODO Support:
+
+	✔	http://typicons.com/ @created(17-08-14 00:05) @done (17-08-14 10:42)
+	✔	http://map-icons.com/ @created(17-08-14 00:06) @done (17-08-14 10:54)
+
+TODO:
+	☐	Write unit-tests

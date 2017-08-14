@@ -1,0 +1,195 @@
+#toggle-upload-form {
+  display: none; }
+
+#toggle-upload-form.open {
+  display: block !important; }
+
+.simple-iconfonts .toggle-indicator:before {
+  content: "\f333";
+  display: inline-block;
+  font: 400 20px/1 dashicons;
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-decoration: none !important; }
+
+.simple-iconfonts .handlediv:focus .toggle-indicator:before {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important; }
+
+.simple-iconfonts {
+  margin-left: -10px;
+  margin-right: -10px;
+  overflow: hidden; }
+  .simple-iconfonts__spinner {
+    top: 75px;
+    left: 50%;
+    position: absolute;
+    margin: 0 0 -10px; }
+
+.simple-iconfonts__box {
+  width: 50%;
+  float: left;
+  padding-left: 10px;
+  padding-right: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
+  .simple-iconfonts__box.loading {
+    opacity: 0.35; }
+
+.simple-iconfonts__box .postbox .inside {
+  margin-bottom: 0;
+  position: relative; }
+
+.simple-iconfonts__box .inside-icons {
+  height: 250px;
+  overflow-x: hidden;
+  overflow-y: auto; }
+
+.simple-iconfonts__box .postbox .hndle {
+  cursor: default; }
+
+.simple-iconfonts__box .postbox-search-icons {
+  position: absolute;
+  top: 5px;
+  right: 15px; }
+
+.handlediv + .postbox-search-icons {
+  right: 37px; }
+
+.simple-iconfonts__icons {
+  margin-top: 1px;
+  margin-left: 1px;
+  margin-bottom: 0;
+  clear: bold; }
+  .simple-iconfonts__icons > li {
+    float: left;
+    display: block;
+    position: relative;
+    width: 42px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 0;
+    border: solid 1px #efefef;
+    margin: -1px 0 0 -1px; }
+    .simple-iconfonts__icons > li i {
+      vertical-align: middle; }
+  .simple-iconfonts__icons .zoom-icon {
+    width: 64px;
+    height: 64px;
+    line-height: 50px;
+    font-size: 35px;
+    top: -12px;
+    left: -12px;
+    position: absolute;
+    background-color: #fff;
+    z-index: 20;
+    display: none;
+    -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25); }
+  .simple-iconfonts__icons li:hover .zoom-icon {
+    display: block; }
+  .simple-iconfonts__icons .icon-label {
+    font-size: 10px;
+    line-height: 1;
+    display: block;
+    padding: 3px;
+    white-space: nowrap;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.75);
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: absolute;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box; }
+
+.split-button-body {
+  display: none;
+  position: absolute;
+  top: 39px;
+  right: 0;
+  background-color: #fff;
+  min-width: 180px;
+  max-width: 100%;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  -webkit-box-shadow: -1px 0px 1px rgba(0, 0, 0, 0.15);
+          box-shadow: -1px 0px 1px rgba(0, 0, 0, 0.15);
+  z-index: 25; }
+
+.open > .split-button-body,
+.split-button-body.open {
+  display: block; }
+
+.split-button-body:after,
+.split-button-body:before {
+  position: absolute;
+  right: 12px;
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-color: transparent;
+  content: ""; }
+
+.split-button-body:before {
+  top: -18px;
+  border-bottom-color: #ccc;
+  border-width: 9px;
+  right: 11px; }
+
+.split-button-body:after {
+  top: -16px;
+  border-bottom-color: #fff;
+  border-width: 8px; }
+
+.split-button-body .split-button-option {
+  display: block;
+  padding: 5px 15px;
+  margin: 0;
+  text-align: left;
+  line-height: 2; }
+
+.wp-core-ui .delete-button {
+  color: #a00;
+  text-decoration: none; }
+  .wp-core-ui .delete-button:hover, .wp-core-ui .delete-button:focus {
+    color: #a00; }
+
+.ac-pagination {
+  text-align: center; }
+
+.ac-pagination > li {
+  margin-bottom: 0;
+  display: inline-block; }
+
+.ac-pagination > li + li {
+  margin-left: 5px; }
+
+.ac-pagination > li > a {
+  padding: 7px 12px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  text-decoration: none;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04); }
+
+.ac-pagination > .active > a {
+  border-color: #ddd;
+  background-color: #f7f7f7; }
+
+.simple-iconfonts-lock {
+  color: #898989;
+  font-size: 12px;
+  vertical-align: baseline;
+  height: auto; }
+
+.deactive .simple-iconfonts__icons {
+  opacity: 0.25; }
+
+/*# sourceMappingURL=simple-iconfonts.css.map */
