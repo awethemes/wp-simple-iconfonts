@@ -25,14 +25,14 @@ if ( ! function_exists( 'wp_simple_iconfonts_field' ) ) :
 				'type' => '',
 				'icon' => '',
 			),
-			'select' => sprintf( '<a class="ipf-select">%s</a>', esc_html__( 'Select Icon', 'icon-picker-field' ) ),
-			'remove' => sprintf( '<a class="ipf-remove button hidden">%s</a>', esc_html__( 'Remove', 'icon-picker-field' ) ),
+			'select' => sprintf( '<a class="simple-iconfonts-picker-select">%s</a>', esc_html__( 'Select Icon', 'icon-picker-field' ) ),
+			'remove' => sprintf( '<a class="simple-iconfonts-picker-remove button hidden">%s</a>', esc_html__( 'Remove', 'icon-picker-field' ) ),
 		);
 
 		$args          = wp_parse_args( $args, $defaults );
 		$args['value'] = wp_parse_args( $args['value'], $defaults['value'] );
 
-		$field  = sprintf( '<div id="%s" class="ipf">', $args['id'] );
+		$field  = sprintf( '<div id="%s" class="simple-iconfonts-picker">', $args['id'] );
 		$field .= $args['select'];
 		$field .= $args['remove'];
 
@@ -41,7 +41,7 @@ if ( ! function_exists( 'wp_simple_iconfonts_field' ) ) :
 				'<input type="hidden" id="%s" name="%s" class="%s" value="%s" />',
 				esc_attr( "{$args['id']}-{$key}" ),
 				esc_attr( "{$args['name']}[{$key}]" ),
-				esc_attr( "ipf-{$key}" ),
+				esc_attr( "simple-iconfonts-picker-{$key}" ),
 				esc_attr( $value )
 			);
 		}
@@ -53,14 +53,15 @@ if ( ! function_exists( 'wp_simple_iconfonts_field' ) ) :
 		);
 		$field .= '</div>';
 
-		wp_enqueue_script( 'icon-picker' );
 		wp_enqueue_style( 'simple-iconfonts-picker' );
+		wp_enqueue_script( 'simple-iconfonts-picker' );
+
 		foreach ( wp_simple_iconfonts()->all() as $iconpack ) {
 			$iconpack->enqueue_styles();
 		}
 
 		if ( $echo ) {
-			echo $field; // xss ok
+			echo $field; // XSS OK.
 		} else {
 			return $field;
 		}

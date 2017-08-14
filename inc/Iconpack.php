@@ -138,7 +138,7 @@ class Iconpack {
 		$props = array(
 			'id'         => $this->id,
 			'name'       => $this->name,
-			'controller' => 'Font', // Never change this.
+			'controller' => 'SimpleIconpack', // Never change this.
 			'templateId' => 'font',
 			'data'       => array(
 				'groups' => $this->groups(),

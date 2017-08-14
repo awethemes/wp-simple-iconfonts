@@ -252,7 +252,7 @@ final class Iconfonts {
 		$types['image'] = array(
 			'id'         => 'image',
 			'name'       => 'Image',
-			'controller' => 'Img',
+			'controller' => 'SimpleImage',
 			'templateId' => 'image',
 			'data'       => array( 'mimeTypes' => Utils::get_image_mime_types() ),
 		);
@@ -260,7 +260,7 @@ final class Iconfonts {
 		$types['svg'] = array(
 			'id'         => 'svg',
 			'name'       => 'SVG',
-			'controller' => 'Img',
+			'controller' => 'SimpleImage',
 			'templateId' => 'svg',
 			'data'       => array( 'mimeTypes' => 'image/svg+xml' ),
 		);
@@ -348,9 +348,12 @@ final class Iconfonts {
 	 * @access private
 	 */
 	public function register_admin_scripts() {
-		wp_register_style( 'simple-iconfonts-picker', $this->get_plugin_url( 'css/simple-iconfonts-picker.css' ), array(), static::VERSION );
 		wp_register_script( 'icon-picker', $this->get_plugin_url( 'js/icon-picker.js' ), array( 'media-views' ), '0.5.0', true );
-		wp_localize_script( 'icon-picker', 'iconPicker', array(
+
+		wp_register_style( 'simple-iconfonts-picker', $this->get_plugin_url( 'css/simple-iconfonts-picker.css' ), array(), static::VERSION );
+		wp_register_script( 'simple-iconfonts-picker', $this->get_plugin_url( 'js/simple-iconfonts-picker.js' ), array( 'icon-picker' ), static::VERSION );
+
+		wp_localize_script( 'simple-iconfonts-picker', '_simpleIconFontsPicker', array(
 			'types' => $this->get_for_iconpicker_js(),
 		) );
 	}
@@ -410,8 +413,8 @@ final class Iconfonts {
 	 */
 	public function _add_iconfonts_menu() {
 		$hook_suffix = add_management_page(
-			esc_html__( 'Font Icons', 'wp_simple_iconfonts' ),
-			esc_html__( 'Font Icons', 'wp_simple_iconfonts' ),
+			esc_html__( 'Icon Fonts', 'wp_simple_iconfonts' ),
+			esc_html__( 'Icon Fonts', 'wp_simple_iconfonts' ),
 			'manage_options',
 			'wp-simple-iconfonts',
 			array( new Admin_Page( $this ), 'output' )
