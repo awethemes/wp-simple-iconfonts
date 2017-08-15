@@ -17,5 +17,7 @@ TODO Support:
 	✔	http://map-icons.com/ @created(17-08-14 00:06) @done (17-08-14 10:54)
 
 TODO:
-	☐	Write unit-tests
+	✔	Use own picker controller (Need more code) @done (17-08-14 18:07)
+	✔	Allow upload "custom-format" icon pack. @done (17-08-15 11:30)
 	☐	Make register icon can be deactive, active.
+	☐	Write unit-tests
