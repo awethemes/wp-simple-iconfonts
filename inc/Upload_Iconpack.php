@@ -3,7 +3,7 @@ namespace WP_Simple_Iconfonts;
 
 class Upload_Iconpack extends Iconpack {
 	/**
-	 * //
+	 * TODO: ...
 	 *
 	 * @param string $id Upload iconpack ID.
 	 */
@@ -12,11 +12,15 @@ class Upload_Iconpack extends Iconpack {
 			return;
 		}
 
-		$metadata = file_get_contents(
-			wp_simple_iconfonts()->get_path( 'icons_dir' ) . $id . '/metadata.json'
-		);
+		$metadata = wp_simple_iconfonts()->get_path( 'icons_dir' ) . $id . '/metadata.json';
+		if ( ! file_exists( $metadata ) ) {
+			return;
+		}
 
-		$args = json_decode( $metadata, true );
+		$args = json_decode( file_get_contents( $metadata ), true );
+		if ( json_last_error() ) {
+			return;
+		}
 
 		parent::__construct( $args );
 	}
