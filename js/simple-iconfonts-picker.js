@@ -12,7 +12,7 @@
 	var SimpleIconPicker = BaseIconPicker.extend({
 		initialize: function() {
 			_.defaults( this.options, {
-				title:       l10n.iconPicker.frameTitle,
+				title:       '',
 				multiple:    false,
 				ipTypes:     _simpleIconFontsPicker.types,
 				target:      null,
@@ -66,7 +66,7 @@
 				$select.parent().removeClass('has-icon');
 
 				$select
-					.text( l10n.selectIcon )
+					.text( '' )
 					.attr( 'title', '' );
 
 				return;
@@ -82,7 +82,7 @@
 			$select.parent().addClass('has-icon');
 
 			$select
-				.attr( 'title', l10n.selectIcon )
+				.attr( 'title', '' )
 				.html( template({
 					type: type,
 					icon: icon,

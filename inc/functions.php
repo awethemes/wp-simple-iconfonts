@@ -53,6 +53,7 @@ if ( ! function_exists( 'wp_simple_iconfonts_field' ) ) :
 		);
 		$field .= '</div>';
 
+		wp_enqueue_media();
 		wp_enqueue_style( 'simple-iconfonts-picker' );
 		wp_enqueue_script( 'simple-iconfonts-picker' );
 

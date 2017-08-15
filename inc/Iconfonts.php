@@ -384,7 +384,7 @@ final class Iconfonts {
 	 * @return void
 	 */
 	public function _media_templates() {
-		include trailingslashit( __DIR__ ) . 'views/media_templates.php';
+		include trailingslashit( __DIR__ ) . 'views/media-templates.php';
 	}
 
 	/**
