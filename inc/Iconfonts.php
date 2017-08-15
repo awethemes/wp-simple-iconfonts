@@ -3,7 +3,7 @@ namespace WP_Simple_Iconfonts;
 
 final class Iconfonts {
 	/* Constants */
-	const VERSION = '0.1.0-dev';
+	const VERSION = '0.1.0';
 
 	/**
 	 * The icon fonts installer.

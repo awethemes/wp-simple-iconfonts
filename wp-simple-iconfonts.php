@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     WP Simple Iconfonts
  * Plugin URI:      https://github.com/awethemes/wp-simple-iconfonts
- * Description:     A dead simple, icon fonts for WordPress Edit
+ * Description:     A dead simple, icon fonts for WordPress
  * Author:          awethemes
  * Author URI:      https://awethemes.com/
  * Text Domain:     wp_simple_iconfonts
