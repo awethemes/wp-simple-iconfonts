@@ -51,4 +51,9 @@ if ( ! class_exists( 'WP_Simple_Iconfonts\\Iconfonts' ) ) :
 
 	// Share main class into global variable.
 	$GLOBALS['wp_simple_iconfonts'] = new WP_Simple_Iconfonts\Iconfonts;
+
+	/**
+	 * Init supports.
+	 */
+	WP_Simple_Iconfonts\Support\Nav_Menu_Icon::instance();
 endif;
