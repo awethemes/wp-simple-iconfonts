@@ -63,9 +63,9 @@
 
 			if ( type === '' || icon === '' || ! _.has( _simpleIconFontsPicker.types, type ) ) {
 				$remove.addClass( 'hidden' );
+				$select.parent().removeClass('has-icon');
+
 				$select
-					.removeClass( 'has-icon' )
-					.addClass( 'button' )
 					.text( l10n.selectIcon )
 					.attr( 'title', '' );
 
@@ -79,10 +79,10 @@
 			}
 
 			$remove.removeClass( 'hidden' );
+			$select.parent().addClass('has-icon');
+
 			$select
 				.attr( 'title', l10n.selectIcon )
-				.addClass( 'has-icon' )
-				.removeClass( 'button' )
 				.html( template({
 					type: type,
 					icon: icon,

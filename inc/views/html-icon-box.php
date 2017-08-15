@@ -22,7 +22,7 @@ if ( $icon instanceof Upload_Iconpack ) {
 	<div class="postbox">
 
 		<?php if ( $icon instanceof Upload_Iconpack ) : ?>
-			<button type="button" data-toggle="simple-iconfonts-dropdown" class="handlediv button-link" title="<?php echo esc_html__( 'Actions', 'wp_simple_iconfonts' ); ?>">
+			<button type="button" data-toggle="simple-iconfonts-dropdown" class="handlediv" title="<?php echo esc_html__( 'Actions', 'wp_simple_iconfonts' ); ?>">
 				<span class="screen-reader-text"><?php echo esc_html__( 'Actions', 'wp_simple_iconfonts' ); ?></span>
 				<span class="toggle-indicator" aria-hidden="true"></span>
 			</button>
