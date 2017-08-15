@@ -300,8 +300,9 @@ final class Iconfonts {
 		$this->paths['icons_dir'] = trailingslashit( $upload_dir['basedir'] ) . 'simple-iconfonts/';
 		$this->paths['icons_url'] = trailingslashit( $upload_dir['baseurl'] ) . 'simple-iconfonts/';
 
-		// Priority is important here!
+		// Priority is so important at here!
 		$this->extractors = apply_filters( 'wp_simple_iconfonts_extractors', array(
+			'WP_Simple_Iconfonts\\Extractor\\Simple_Iconfonts_Extractor',
 			'WP_Simple_Iconfonts\\Extractor\\Fontello_Extractor',
 			'WP_Simple_Iconfonts\\Extractor\\Icomoon_App_Extractor',
 			'WP_Simple_Iconfonts\\Extractor\\Fontawesome_Extractor',
