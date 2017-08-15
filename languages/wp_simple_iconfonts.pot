@@ -69,6 +69,10 @@ msgstr ""
 msgid "Invalid icon pack data."
 msgstr ""
 
+#: inc/Support/Nav_Menu_Icon.php:103
+msgid "Iconfonts"
+msgstr ""
+
 #: inc/views/html-icon-box.php:25, inc/views/html-icon-box.php:26
 msgid "Actions"
 msgstr ""
