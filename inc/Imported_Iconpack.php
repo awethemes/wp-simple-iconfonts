@@ -1,7 +1,7 @@
 <?php
 namespace WP_Simple_Iconfonts;
 
-class Upload_Iconpack extends Iconpack {
+class Imported_Iconpack extends Iconpack {
 	/**
 	 * TODO: ...
 	 *

@@ -6,13 +6,6 @@ final class Iconfonts {
 	const VERSION = '0.1.0';
 
 	/**
-	 * The icon fonts installer.
-	 *
-	 * @var \WP_Simple_Iconfonts\Installer
-	 */
-	protected $installer;
-
-	/**
 	 * An array registerd icon packs.
 	 *
 	 * @var array
@@ -32,6 +25,13 @@ final class Iconfonts {
 	 * @var array
 	 */
 	protected $paths = array();
+
+	/**
+	 * An array icons was imported.
+	 *
+	 * @var array
+	 */
+	protected $imported;
 
 	/**
 	 * Singleton class instance implementation.
@@ -59,59 +59,124 @@ final class Iconfonts {
 	public function __construct() {
 		static::$instance = $this;
 
-		$this->setup();
-		$this->installer = new Installer( $this );
+		$upload_dir = wp_upload_dir();
+		$this->paths['tmp_dir']   = trailingslashit( $upload_dir['basedir'] ) . 'tmp/simple-iconfonts/';
+		$this->paths['icons_dir'] = trailingslashit( $upload_dir['basedir'] ) . 'simple-iconfonts/';
+		$this->paths['icons_url'] = trailingslashit( $upload_dir['baseurl'] ) . 'simple-iconfonts/';
+
+		// Priority is so important at here!
+		$this->extractors = apply_filters( 'wp_simple_iconfonts_extractors', array(
+			'WP_Simple_Iconfonts\\Extractor\\Simple_Iconfonts_Extractor',
+			'WP_Simple_Iconfonts\\Extractor\\Fontello_Extractor',
+			'WP_Simple_Iconfonts\\Extractor\\Icomoon_App_Extractor',
+			'WP_Simple_Iconfonts\\Extractor\\Fontawesome_Extractor',
+			'WP_Simple_Iconfonts\\Extractor\\Foundation_Extractor',
+			'WP_Simple_Iconfonts\\Extractor\\Ionicons_Extractor',
+			'WP_Simple_Iconfonts\\Extractor\\Elusive_Extractor',
+			'WP_Simple_Iconfonts\\Extractor\\Paymentfont_Extractor',
+			'WP_Simple_Iconfonts\\Extractor\\Pixeden_Extractor',
+			'WP_Simple_Iconfonts\\Extractor\\Themify_Extractor',
+			'WP_Simple_Iconfonts\\Extractor\\Typicons_Extractor',
+			'WP_Simple_Iconfonts\\Extractor\\Mapicons_Extractor',
+		));
 
 		$this->init();
 	}
 
 	/**
 	 * Init the hooks.
+	 *
+	 * @access private
 	 */
 	public function init() {
 		add_action( 'init', array( $this, 'register_icons' ), 5 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_styles' ), 5 );
-		add_action( 'admin_enqueue_scripts', array( $this, 'register_styles' ), 5 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 10 );
 
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
-
-		add_action( 'admin_menu', array( $this, '_add_iconfonts_menu' ) );
 		add_filter( 'upload_mimes', array( $this, '_svg_mime_support' ) );
-
+		add_action( 'admin_menu', array( $this, '_add_iconfonts_menu' ) );
 		add_filter( 'media_view_strings', array( $this, '_media_view_strings' ) );
 		add_action( 'print_media_templates', array( $this, '_media_templates' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, '_admin_scripts' ) );
+	}
+
+	/**
+	 * Register icons pack.
+	 *
+	 * @access private
+	 */
+	public function register_icons() {
+		$this->register( new Icons\Dashicons );
+
+		foreach ( $this->get_imported_icons() as $id => $status ) {
+			if ( empty( $id ) ) {
+				continue;
+			}
+
+			$this->register( new Imported_Iconpack( $id ) );
+		}
+
+		do_action( 'wp_simple_iconfonts', $this );
 	}
 
 	/**
 	 * Get iconpack by ID.
 	 *
-	 * @param  string $id Iconpack ID.
-	 * @return mixed
+	 * @param  string $id    Iconpack ID.
+	 * @param  bool   $force Force get the icon, even in inactive.
+	 * @return Iconpack|null|false
 	 */
-	public function get( $id ) {
-		if ( isset( $this->iconpacks[ $id ] ) ) {
-			return $this->iconpacks[ $id ];
+	public function get( $id, $force = false ) {
+		$id = ( $id instanceof Iconpack ) ? $id->id : $id;
+		if ( ! isset( $this->iconpacks[ $id ] ) ) {
+			return;
 		}
+
+		$iconpack = $this->iconpacks[ $id ];
+		if ( $force ) {
+			return $iconpack;
+		}
+
+		$imported = $this->get_imported_icons();
+		if ( $iconpack instanceof Imported_Iconpack && isset( $imported[ $id ] ) && ! $imported[ $id ] ) {
+			return false;
+		}
+
+		return $iconpack;
 	}
 
 	/**
 	 * Determine if an iconpack is registerd.
 	 *
-	 * @param  string $id Iconpack ID.
+	 * @param  string $id    Iconpack ID.
+	 * @param  bool   $force Force check the icon, even in inactive.
 	 * @return boolean
 	 */
-	public function has( $id ) {
-		return ! is_null( $this->get( $id ) );
+	public function has( $id, $force = false ) {
+		$iconpack = $this->get( $id, $force );
+
+		return $iconpack instanceof Iconpack;
 	}
 
 	/**
 	 * Get all iconpacks.
 	 *
+	 * @param bool $force Force get all icons, even in inactive.
 	 * @return array
 	 */
-	public function all() {
-		return $this->iconpacks;
+	public function all( $force = false ) {
+		if ( $force ) {
+			return $this->iconpacks;
+		}
+
+		// We support PHP 5.3, because $this invisible in Closures,
+		// so let assign $this with $self variable.
+		// See: https://stackoverflow.com/questions/5734011/php-5-4-closure-this-support .
+		$self = $this;
+
+		return array_filter( $this->iconpacks, function( $iconpack ) use ( $self, $force ) {
+			return $self->get( $iconpack, $force );
+		});
 	}
 
 	/**
@@ -125,6 +190,10 @@ final class Iconfonts {
 			return;
 		}
 
+		if ( $this->has( $icon->id, true ) ) {
+			return;
+		}
+
 		$this->iconpacks[ $icon->id ] = $icon;
 	}
 
@@ -135,25 +204,29 @@ final class Iconfonts {
 	 * @return void
 	 */
 	public function unregister( $id ) {
+		$id = ( $id instanceof Iconpack ) ? $id->id : $id;
+
 		unset( $this->iconpacks[ $id ] );
 	}
 
 	/**
-	 * Get icon fonts installer.
+	 * Check if icon pack is valid.
 	 *
-	 * @return \WP_Simple_Iconfonts\Installer
+	 * @param  Iconpack $icon Icon pack.
+	 * @return bool
 	 */
-	public function get_installer() {
-		return $this->installer;
-	}
+	protected function is_valid_iconpack( Iconpack $icon ) {
+		if ( empty( $icon->id ) ) {
+			trigger_error( 'WP Simple Iconfonts: "ID" cannot be empty.' );
+			return false;
+		}
 
-	/**
-	 * Get supported extractors.
-	 *
-	 * @return array
-	 */
-	public function get_extractors() {
-		return $this->extractors;
+		if ( isset( $this->iconpacks[ $icon->id ] ) ) {
+			trigger_error( sprintf( 'WP Simple Iconfonts: Icon pack %s is already registered. Please use a different ID.', $icon->id ) );
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
@@ -186,6 +259,15 @@ final class Iconfonts {
 	}
 
 	/**
+	 * Get supported extractors.
+	 *
+	 * @return array
+	 */
+	public function get_extractors() {
+		return $this->extractors;
+	}
+
+	/**
 	 * Get the path.
 	 *
 	 * @param  string $path Path name.
@@ -201,13 +283,12 @@ final class Iconfonts {
 	 * @return array
 	 */
 	public function get_imported_icons() {
-		static $imported;
-
-		if ( is_null( $imported ) ) {
+		if ( is_null( $this->imported ) ) {
 			$imported = get_option( '_wp_simple_iconfonts', array() );
+			$this->imported = is_array( $imported ) ? $imported : array();
 		}
 
-		return is_array( $imported ) ? $imported : array();
+		return $this->imported;
 	}
 
 	/**
@@ -219,13 +300,7 @@ final class Iconfonts {
 		$types = array();
 		$names = array();
 
-		$imported = $this->get_imported_icons();
-
 		foreach ( $this->all() as $icon ) {
-			if ( $icon instanceof Upload_Iconpack && isset( $imported[ $icon->id ] ) && ! $imported[ $icon->id ] ) {
-				continue;
-			}
-
 			$types[ $icon->id ] = $icon->get_props();
 			$names[ $icon->id ] = $icon->name;
 		}
@@ -269,94 +344,14 @@ final class Iconfonts {
 	}
 
 	/**
-	 * Check if icon pack is valid.
-	 *
-	 * @param  Iconpack $icon Icon pack.
-	 * @return bool
-	 */
-	protected function is_valid_iconpack( Iconpack $icon ) {
-		if ( empty( $icon->id ) ) {
-			trigger_error( 'WP Simple Iconfonts: "ID" cannot be empty.' );
-			return false;
-		}
-
-		if ( isset( $this->iconpacks[ $icon->id ] ) ) {
-			trigger_error( sprintf( 'WP Simple Iconfonts: Icon pack %s is already registered. Please use a different ID.', $icon->id ) );
-			return false;
-		}
-
-		return true;
-	}
-
-	/**
-	 * Setup upload, tmp directory and the extractors.
-	 *
-	 * @return void
-	 */
-	protected function setup() {
-		$upload_dir = wp_upload_dir();
-
-		$this->paths['tmp_dir']   = trailingslashit( $upload_dir['basedir'] ) . 'tmp/simple-iconfonts/';
-		$this->paths['icons_dir'] = trailingslashit( $upload_dir['basedir'] ) . 'simple-iconfonts/';
-		$this->paths['icons_url'] = trailingslashit( $upload_dir['baseurl'] ) . 'simple-iconfonts/';
-
-		// Priority is so important at here!
-		$this->extractors = apply_filters( 'wp_simple_iconfonts_extractors', array(
-			'WP_Simple_Iconfonts\\Extractor\\Simple_Iconfonts_Extractor',
-			'WP_Simple_Iconfonts\\Extractor\\Fontello_Extractor',
-			'WP_Simple_Iconfonts\\Extractor\\Icomoon_App_Extractor',
-			'WP_Simple_Iconfonts\\Extractor\\Fontawesome_Extractor',
-			'WP_Simple_Iconfonts\\Extractor\\Foundation_Extractor',
-			'WP_Simple_Iconfonts\\Extractor\\Ionicons_Extractor',
-			'WP_Simple_Iconfonts\\Extractor\\Elusive_Extractor',
-			'WP_Simple_Iconfonts\\Extractor\\Paymentfont_Extractor',
-			'WP_Simple_Iconfonts\\Extractor\\Pixeden_Extractor',
-			'WP_Simple_Iconfonts\\Extractor\\Themify_Extractor',
-			'WP_Simple_Iconfonts\\Extractor\\Typicons_Extractor',
-			'WP_Simple_Iconfonts\\Extractor\\Mapicons_Extractor',
-		));
-	}
-
-	/**
-	 * Register icons pack.
-	 *
-	 * @access private
-	 */
-	public function register_icons() {
-		$this->register( new Icons\Dashicons );
-
-		foreach ( $this->get_imported_icons() as $id => $status ) {
-			$this->register( new Upload_Iconpack( $id ) );
-		}
-
-		do_action( 'wp_simple_iconfonts', $this );
-	}
-
-	/**
 	 * Register icons pack.
 	 *
 	 * @access private
 	 */
 	public function register_styles() {
-		foreach ( $this->all() as $iconpack ) {
+		foreach ( $this->all( true ) as $iconpack ) {
 			$iconpack->register_styles();
 		}
-	}
-
-	/**
-	 * Register admin scripts.
-	 *
-	 * @access private
-	 */
-	public function register_admin_scripts() {
-		wp_register_script( 'icon-picker', $this->get_plugin_url( 'js/icon-picker.js' ), array( 'media-views' ), '0.5.0', true );
-
-		wp_register_style( 'simple-iconfonts-picker', $this->get_plugin_url( 'css/simple-iconfonts-picker.css' ), array(), static::VERSION );
-		wp_register_script( 'simple-iconfonts-picker', $this->get_plugin_url( 'js/simple-iconfonts-picker.js' ), array( 'icon-picker' ), static::VERSION );
-
-		wp_localize_script( 'simple-iconfonts-picker', '_simpleIconFontsPicker', array(
-			'types' => $this->get_for_iconpicker_js(),
-		) );
 	}
 
 	/**
@@ -365,15 +360,33 @@ final class Iconfonts {
 	 * @access private
 	 */
 	public function enqueue_styles() {
-		$imported = $this->get_imported_icons();
-
 		foreach ( $this->all() as $iconpack ) {
-			if ( $iconpack instanceof Upload_Iconpack && isset( $imported[ $iconpack->id ] ) && ! $imported[ $iconpack->id ] ) {
-				continue;
-			}
-
 			$iconpack->enqueue_styles();
 		}
+	}
+
+	/**
+	 * Register admin scripts.
+	 *
+	 * @access private
+	 */
+	public function _admin_scripts() {
+		$this->register_styles();
+
+		wp_register_style( 'wp-simple-iconfonts', $this->get_plugin_url( 'css/simple-iconfonts.css' ), array(), static::VERSION );
+		wp_register_script( 'wp-simple-iconfonts', $this->get_plugin_url( 'js/simple-iconfonts.js' ), array( 'jquery' ), static::VERSION );
+		wp_register_script( 'wp-simple-iconfonts', '_simpleIconfonts', array(
+			'strings' => array(
+				'warning_delete' => esc_html__( 'This icon pack will be lost in your system. Are you sure want to do this?', 'wp_simple_iconfonts' ),
+			),
+		));
+
+		wp_register_script( 'icon-picker', $this->get_plugin_url( 'js/icon-picker.js' ), array( 'media-views' ), '0.5.0', true );
+		wp_register_style( 'simple-iconfonts-picker', $this->get_plugin_url( 'css/simple-iconfonts-picker.css' ), array(), static::VERSION );
+		wp_register_script( 'simple-iconfonts-picker', $this->get_plugin_url( 'js/simple-iconfonts-picker.js' ), array( 'icon-picker' ), static::VERSION );
+		wp_localize_script( 'simple-iconfonts-picker', '_simpleIconFontsPicker', array(
+			'types' => $this->get_for_iconpicker_js(),
+		) );
 	}
 
 	/**

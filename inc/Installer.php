@@ -45,7 +45,7 @@ class Installer {
 		}
 
 		// TODO: We need check version of icon.
-		if ( $this->iconfonts->get( $result->id ) ) {
+		if ( $this->iconfonts->has( $result->id, true ) ) {
 			$this->delete_directory( $delete_after, $directory, $working_directory );
 			return new WP_Error( 'error', sprintf( esc_html__( 'The icon pack "%s" has been exists.', 'wp_simple_iconfonts' ),  $result->name ) );
 		}
@@ -56,7 +56,7 @@ class Installer {
 		$opt = is_array( $opt ) ? $opt : array();
 		$opt[ $result->id ] = true;
 
-		$this->iconfonts->register( new Upload_Iconpack( $result->id ) );
+		$this->iconfonts->register( new Imported_Iconpack( $result->id ) );
 		update_option( '_wp_simple_iconfonts', $opt );
 
 		$this->delete_directory( $delete_after, $directory, $working_directory );

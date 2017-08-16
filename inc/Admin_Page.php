@@ -89,7 +89,7 @@ class Admin_Page {
 		 */
 		do_action( 'wp_simple_iconfonts_before_install_iconpack', $upload_result, $this );
 
-		$installer = $this->iconfonts->get_installer();
+		$installer = new Installer( $this->iconfonts );
 		$installed_icon = $installer->zip_install( $upload_result['file'], true );
 		@unlink( $upload_result['file'] );
 
@@ -130,9 +130,9 @@ class Admin_Page {
 		}
 
 		$iconpack = sanitize_text_field( $_REQUEST['delete'] );
-		$iconpack = $this->iconfonts->get( $iconpack );
+		$iconpack = $this->iconfonts->get( $iconpack, true );
 
-		if ( is_null( $iconpack ) ) {
+		if ( ! $iconpack ) {
 			return;
 		}
 
@@ -161,7 +161,7 @@ class Admin_Page {
 		}
 
 		$iconpack = $this->iconfonts->get(
-			sanitize_text_field( $_REQUEST['deactive'] )
+			sanitize_text_field( $_REQUEST['deactive'] ), true
 		);
 
 		if ( is_null( $iconpack ) ) {
@@ -186,10 +186,10 @@ class Admin_Page {
 		}
 
 		$iconpack = $this->iconfonts->get(
-			sanitize_text_field( $_REQUEST['active'] )
+			sanitize_text_field( $_REQUEST['active'] ), true
 		);
 
-		if ( is_null( $iconpack ) ) {
+		if ( ! $iconpack ) {
 			return;
 		}
 
@@ -281,19 +281,12 @@ class Admin_Page {
 	 * @access private
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_media();
-
-		wp_enqueue_style( 'wp-simple-iconfonts', $this->iconfonts->get_plugin_url( 'css/simple-iconfonts.css' ), array(), Iconfonts::VERSION );
-		wp_enqueue_script( 'wp-simple-iconfonts', $this->iconfonts->get_plugin_url( 'js/simple-iconfonts.js' ), array( 'jquery' ), Iconfonts::VERSION );
-
-		wp_localize_script( 'wp-simple-iconfonts', '_simpleIconfonts', array(
-			'strings' => array(
-				'warning_delete' => esc_html__( 'This icon pack will be lost in your system. Are you sure want to do this?', 'wp_simple_iconfonts' ),
-			),
-		));
-
-		foreach ( $this->iconfonts->all() as $iconpack ) {
+		foreach ( $this->iconfonts->all( true ) as $iconpack ) {
 			$iconpack->enqueue_styles();
 		}
+
+		wp_enqueue_media();
+		wp_enqueue_style( 'wp-simple-iconfonts' );
+		wp_enqueue_script( 'wp-simple-iconfonts' );
 	}
 }

@@ -22,11 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php $this->show_messages(); ?>
 
 	<div class="metabox-holder simple-iconfonts">
-		<?php foreach ( $this->iconfonts->all() as $icon ) :
+		<?php foreach ( $this->iconfonts->all( true ) as $icon ) :
 			$this->add_icons_box( $icon );
 		endforeach; ?>
 	</div>
-
-	<ul class="pagination ac-pagination clear"></ul>
-	<p class="no-themes no-icons hide-if-no-js"><?php esc_html_e( 'No icon pack found.', 'wp_simple_iconfonts' ); ?></p>
 </div>

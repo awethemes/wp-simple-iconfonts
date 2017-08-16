@@ -5,7 +5,7 @@
  * @package WP_Simple_Iconfonts
  */
 
-use WP_Simple_Iconfonts\Upload_Iconpack;
+use WP_Simple_Iconfonts\Imported_Iconpack;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -14,14 +14,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 $is_deactive = false;
 $all_icons = $this->iconfonts->get_imported_icons();
 
-if ( $icon instanceof Upload_Iconpack ) {
+if ( $icon instanceof Imported_Iconpack ) {
 	$is_deactive = isset( $all_icons[ $icon->id ] ) && ! $all_icons[ $icon->id ];
 }
 
 ?><div id="<?php echo esc_attr( sprintf( 'ac-icon-%s', $icon->id ) ); ?>" class="simple-iconfonts__box <?php echo ( $is_deactive ? 'deactive' : '' ); ?>">
 	<div class="postbox">
 
-		<?php if ( $icon instanceof Upload_Iconpack ) : ?>
+		<?php if ( $icon instanceof Imported_Iconpack ) : ?>
 			<button type="button" data-toggle="simple-iconfonts-dropdown" class="handlediv" title="<?php echo esc_html__( 'Actions', 'wp_simple_iconfonts' ); ?>">
 				<span class="screen-reader-text"><?php echo esc_html__( 'Actions', 'wp_simple_iconfonts' ); ?></span>
 				<span class="toggle-indicator" aria-hidden="true"></span>
@@ -44,7 +44,7 @@ if ( $icon instanceof Upload_Iconpack ) {
 		</span> -->
 
 		<h2 class="hndle">
-			<?php if ( ! $icon instanceof Upload_Iconpack ) : ?>
+			<?php if ( ! $icon instanceof Imported_Iconpack ) : ?>
 				<span class="dashicons dashicons-lock simple-iconfonts-lock"></span>
 			<?php endif; ?>
 
