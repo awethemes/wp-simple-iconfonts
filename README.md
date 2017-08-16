@@ -32,7 +32,7 @@ If you need show icon-picker, just add this in to your form control:
 <?php
 
 // Get value from database...
-$value = array(
+$values = array(
 	'type' => '',
 	'icon' => '',
 );
