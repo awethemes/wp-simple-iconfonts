@@ -23,10 +23,11 @@ TODO:
 	☐	Write unit-tests
 
 TODO Support Framework/Metabox:
+	✔	WP Customizer @done (17-08-18 06:19)
 	✔	https://wordpress.org/plugins/cmb2/ @done (17-08-17 00:23)
 	✔	https://wordpress.org/plugins/advanced-custom-fields/ @done (17-08-17 00:23)
-	☐	https://wordpress.org/plugins/kirki/
-	☐	https://wordpress.org/plugins/redux-framework/
+	✔	https://wordpress.org/plugins/kirki/ @done (17-08-18 06:12)
+	✔	https://wordpress.org/plugins/redux-framework/ @done (17-08-17 18:38)
 	☐	https://wordpress.org/plugins/titan-framework/
 	☐	https://wordpress.org/plugins/meta-box/
 	☐	https://github.com/humanmade/Custom-Meta-Boxes

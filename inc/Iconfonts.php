@@ -374,7 +374,9 @@ final class Iconfonts {
 		$this->register_styles();
 
 		wp_register_style( 'wp-simple-iconfonts', $this->get_plugin_url( 'css/simple-iconfonts.css' ), array(), static::VERSION );
-		wp_register_script( 'wp-simple-iconfonts', $this->get_plugin_url( 'js/simple-iconfonts.js' ), array( 'jquery' ), static::VERSION );
+		wp_register_style( 'simple-iconfonts-picker', $this->get_plugin_url( 'css/simple-iconfonts-picker.css' ), array(), static::VERSION );
+
+		wp_register_script( 'wp-simple-iconfonts', $this->get_plugin_url( 'js/simple-iconfonts.js' ), array( 'jquery' ), static::VERSION, true );
 		wp_register_script( 'wp-simple-iconfonts', '_simpleIconfonts', array(
 			'strings' => array(
 				'warning_delete' => esc_html__( 'This icon pack will be lost in your system. Are you sure want to do this?', 'wp_simple_iconfonts' ),
@@ -382,11 +384,12 @@ final class Iconfonts {
 		));
 
 		wp_register_script( 'icon-picker', $this->get_plugin_url( 'js/icon-picker.js' ), array( 'media-views' ), '0.5.0', true );
-		wp_register_style( 'simple-iconfonts-picker', $this->get_plugin_url( 'css/simple-iconfonts-picker.css' ), array(), static::VERSION );
-		wp_register_script( 'simple-iconfonts-picker', $this->get_plugin_url( 'js/simple-iconfonts-picker.js' ), array( 'icon-picker' ), static::VERSION );
+		wp_register_script( 'simple-iconfonts-picker', $this->get_plugin_url( 'js/simple-iconfonts-picker.js' ), array( 'icon-picker' ), static::VERSION, true );
 		wp_localize_script( 'simple-iconfonts-picker', '_simpleIconFontsPicker', array(
 			'types' => $this->get_for_iconpicker_js(),
 		) );
+
+		wp_register_script( 'simple-iconfonts-customize', $this->get_plugin_url( 'js/simple-iconfonts-customize.js' ), array( 'jquery', 'simple-iconfonts-picker' ), static::VERSION, true );
 	}
 
 	/**
