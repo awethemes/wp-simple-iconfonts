@@ -7,7 +7,7 @@
  * Author URI:      https://awethemes.com/
  * Text Domain:     wp_simple_iconfonts
  * Domain Path:     /languages
- * Version:         0.1.0
+ * Version:         0.2.0
  *
  * @package         WP_Simple_Iconfonts
  */
