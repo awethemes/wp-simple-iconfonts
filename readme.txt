@@ -1,7 +1,7 @@
 === WP Simple Iconfonts ===
 Contributors: awethemes, anhskohbo
 Donate link: http://awethemes.com/
-Tags: menu, icon, icons, icon-fonts, sprites, fontawesome, font-awesome, dashicons, icomoon, fontello
+Tags: menu, icon, icons, icon-fonts, sprites, fontawesome, font-awesome, dashicons, icomoon, fontello, iconpicker, icon-picker
 Requires at least: 4.4
 Tested up to: 4.8.1
 Stable tag: 0.1.0
@@ -14,19 +14,21 @@ Provides integration for icon bundles and icon providers throughout WordPress.
 
 == Description ==
 
+This plugin provides integration for icon bundles and icon providers throughout WordPress.
+
 You can import icon generate or icon package from those sites:
 
-- Fontello (http://fontello.com)
-- Icomoon (https://icomoon.io/app)
-- Font Awesome (http://fontawesome.io)
-- Foundation Icon Fonts 3 (http://zurb.com/playground/foundation-icon-fonts-3)
-- Ionicons (http://ionicons.com)
-- Elusive (http://elusiveicons.com)
-- PaymentFont (http://paymentfont.io)
-- Pixeden (http://www.pixeden.com/icon-fonts)
-- Themify Icons (https://themify.me/themify-icons)
-- Typicons (http://typicons.com)
-- Map Icons (http://map-icons.com)
+- [Fontello](http://fontello.com)
+- [Icomoon](https://icomoon.io/app)
+- [Font Awesome](http://fontawesome.io)
+- [Foundation Icon Fonts 3](http://zurb.com/playground/foundation-icon-fonts-3)
+- [Ionicons](http://ionicons.com)
+- [Elusive](http://elusiveicons.com)
+- [PaymentFont](http://paymentfont.io)
+- [Pixeden](http://www.pixeden.com/icon-fonts)
+- [Themify Icons](https://themify.me/themify-icons)
+- [Typicons](http://typicons.com)
+- [Map Icons](http://map-icons.com)
 
 Official documentation is [located here.](http://docs.awethemes.com/wp-simple-iconfonts/)
 
