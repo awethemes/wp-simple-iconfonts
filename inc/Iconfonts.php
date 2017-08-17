@@ -98,6 +98,8 @@ final class Iconfonts {
 		add_filter( 'media_view_strings', array( $this, '_media_view_strings' ) );
 		add_action( 'print_media_templates', array( $this, '_media_templates' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, '_admin_scripts' ) );
+
+		add_filter( 'plugin_row_meta', array( $this, '_plugin_links' ), 10, 2 );
 	}
 
 	/**
@@ -456,5 +458,33 @@ final class Iconfonts {
 		}
 
 		return $mimes;
+	}
+
+	/**
+	 * Adds links to the docs and GitHub.
+	 *
+	 * @param  array  $plugin_meta The current array of links.
+	 * @param  string $plugin_file The plugin file.
+	 * @return array
+	 */
+	public function _plugin_links( $plugin_meta, $plugin_file ) {
+		if ( $this->get_plugin_basename() . '/wp-simple-iconfonts.php' === $plugin_file ) {
+			$plugin_meta[] = sprintf( '<a href="%s" target="_blank">%s</a>',
+				esc_url( 'http://docs.awethemes.com/wp-simple-iconfonts' ),
+				esc_html__( 'Documentation', 'wp_simple_iconfonts' )
+			);
+
+			$plugin_meta[] = sprintf( '<a href="%s" target="_blank">%s</a>',
+				esc_url( 'https://github.com/awethemes/wp-simple-iconfonts' ),
+				esc_html__( 'GitHub Repo', 'wp_simple_iconfonts' )
+			);
+
+			$plugin_meta[] = sprintf( '<a href="%s" target="_blank">%s</a>',
+				esc_url( 'https://github.com/awethemes/wp-simple-iconfonts/issues' ),
+				esc_html__( 'Issue Tracker', 'wp_simple_iconfonts' )
+			);
+		}
+
+		return $plugin_meta;
 	}
 }
