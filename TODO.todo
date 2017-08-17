@@ -21,3 +21,14 @@ TODO:
 	✔	Allow upload "custom-format" icon pack. @done (17-08-15 11:30)
 	☐	Make register icon can be deactive, active.
 	☐	Write unit-tests
+
+TODO Support Framework/Metabox:
+	✔	https://wordpress.org/plugins/cmb2/ @done (17-08-17 00:23)
+	✔	https://wordpress.org/plugins/advanced-custom-fields/ @done (17-08-17 00:23)
+	☐	https://wordpress.org/plugins/kirki/
+	☐	https://wordpress.org/plugins/redux-framework/
+	☐	https://wordpress.org/plugins/titan-framework/
+	☐	https://wordpress.org/plugins/meta-box/
+	☐	https://github.com/humanmade/Custom-Meta-Boxes
+	☐	https://github.com/valendesigns/option-tree
+	☐	https://github.com/devinsays/options-framework-plugin/

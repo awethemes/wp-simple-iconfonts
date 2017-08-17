@@ -38,6 +38,7 @@ if ( ! class_exists( 'WP_Simple_Iconfonts\\Iconfonts' ) ) :
 
 	// First, require the autoloader.
 	require trailingslashit( __DIR__ ) . 'autoload.php';
+
 	require trailingslashit( __DIR__ ) . 'inc/functions.php';
 
 	/**
@@ -52,8 +53,9 @@ if ( ! class_exists( 'WP_Simple_Iconfonts\\Iconfonts' ) ) :
 	// Share main class into global variable.
 	$GLOBALS['wp_simple_iconfonts'] = new WP_Simple_Iconfonts\Iconfonts;
 
-	/**
-	 * Init supports.
-	 */
+	// Init the supports.
 	WP_Simple_Iconfonts\Support\Nav_Menu_Icon::instance();
+
+	// Third party supports.
+	require_once trailingslashit( __DIR__ ) . 'third-party-supports.php';
 endif;

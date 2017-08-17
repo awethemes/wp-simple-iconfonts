@@ -25,24 +25,24 @@ if ( ! function_exists( 'wp_simple_iconfonts_field' ) ) :
 				'type' => '',
 				'icon' => '',
 			),
-			'select' => sprintf( '<a class="simple-iconfonts-picker-select">%s</a>', esc_html__( 'Select Icon', 'icon-picker-field' ) ),
-			'remove' => sprintf( '<a class="simple-iconfonts-picker-remove button hidden">%s</a>', esc_html__( 'Remove', 'icon-picker-field' ) ),
+			'atts' => '',
 		);
 
-		$args          = wp_parse_args( $args, $defaults );
+		$args = wp_parse_args( $args, $defaults );
 		$args['value'] = wp_parse_args( $args['value'], $defaults['value'] );
 
 		$field  = sprintf( '<div id="%s" class="simple-iconfonts-picker">', $args['id'] );
-		$field .= $args['select'];
-		$field .= $args['remove'];
+		$field .= sprintf( '<a class="simple-iconfonts-picker-select">%s</a>', esc_html__( 'Select Icon', 'wp_simple_iconfonts' ) );
+		$field .= sprintf( '<a class="simple-iconfonts-picker-remove button hidden">%s</a>', esc_html__( 'Remove', 'wp_simple_iconfonts' ) );
 
 		foreach ( $args['value'] as $key => $value ) {
 			$field .= sprintf(
-				'<input type="hidden" id="%s" name="%s" class="%s" value="%s" />',
+				'<input type="hidden" id="%s" name="%s" class="%s" value="%s" %s />',
 				esc_attr( "{$args['id']}-{$key}" ),
 				esc_attr( "{$args['name']}[{$key}]" ),
 				esc_attr( "simple-iconfonts-picker-{$key}" ),
-				esc_attr( $value )
+				esc_attr( $value ),
+				$args['atts']
 			);
 		}
 
