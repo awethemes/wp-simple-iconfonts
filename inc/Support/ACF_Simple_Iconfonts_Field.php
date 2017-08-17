@@ -1,12 +1,12 @@
 <?php
 namespace WP_Simple_Iconfonts\Support;
 
-class ACF_Simple_Icon_Field extends \acf_field {
+class ACF_Simple_Iconfonts_Field extends \acf_field {
 	/**
 	 * Constructor the field.
 	 */
 	public function __construct() {
-		$this->name     = 'simple_icon';
+		$this->name     = 'simple_iconfonts';
 		$this->label    = esc_html__( 'Icon Picker', 'wp_simple_iconfonts' );
 		$this->defaults = array( 'default_icon' => '' );
 

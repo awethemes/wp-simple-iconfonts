@@ -1,13 +1,13 @@
 <?php
 namespace WP_Simple_Iconfonts\Support;
 
-class CMB2_Simple_Icon_Field {
+class CMB2_Simple_Iconfonts_Field {
 	/**
 	 * Field type.
 	 *
 	 * @var string
 	 */
-	protected $type = 'simple_icon';
+	protected $type = 'simple_iconfonts';
 
 	/**
 	 * Init the CMB2 `simple_icon` type.
