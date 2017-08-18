@@ -3,7 +3,7 @@ namespace WP_Simple_Iconfonts;
 
 final class Iconfonts {
 	/* Constants */
-	const VERSION = '0.2.0';
+	const VERSION = '0.2.1';
 
 	/**
 	 * An array registerd icon packs.
@@ -97,7 +97,7 @@ final class Iconfonts {
 		add_action( 'admin_menu', array( $this, '_add_iconfonts_menu' ) );
 		add_filter( 'media_view_strings', array( $this, '_media_view_strings' ) );
 		add_action( 'print_media_templates', array( $this, '_media_templates' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, '_admin_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, '_register_admin_scripts' ), 5 );
 
 		add_filter( 'plugin_row_meta', array( $this, '_plugin_links' ), 10, 2 );
 	}
@@ -372,7 +372,7 @@ final class Iconfonts {
 	 *
 	 * @access private
 	 */
-	public function _admin_scripts() {
+	public function _register_admin_scripts() {
 		$this->register_styles();
 
 		wp_register_style( 'wp-simple-iconfonts', $this->get_plugin_url( 'css/simple-iconfonts.css' ), array(), static::VERSION );

@@ -95,4 +95,20 @@ class ACF_Simple_Iconfonts_Field extends \acf_field {
 	public function format_value_for_api( $value, $post_id, $field ) {
 		return $this->format_value( $value, $post_id, $field );
 	}
+
+	/**
+	 * Enqueue scripts.
+	 *
+	 * @return void
+	 */
+	public function field_group_admin_enqueue_scripts() {
+		wp_enqueue_media();
+
+		foreach ( wp_simple_iconfonts()->all() as $iconpack ) {
+			$iconpack->enqueue_styles();
+		}
+
+		wp_enqueue_style( 'simple-iconfonts-picker' );
+		wp_enqueue_script( 'simple-iconfonts-picker' );
+	}
 }
