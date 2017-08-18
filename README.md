@@ -23,7 +23,10 @@ If you looking for an icon picker, this's last choice your need.
 
 ### Icon-picker
 
-WP Simple Iconfonts come with large framework, plugins, supports, in list below:
+WP Simple Iconfonts supports almost popular WP framework, metabox... just use a `'type' => 'simple_iconfonts'`
+to display icon picker field.
+
+List currently support icon-picker field/control:
 
 - [x] WP Customizer
 - [x] [CMB2](https://wordpress.org/plugins/cmb2/)
