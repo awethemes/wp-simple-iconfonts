@@ -8,12 +8,12 @@
 
 		initControl: function() {
 			var control = this;
-			var picker  = this.container.find( '.simple-iconfonts-picker' );
+			var picker  = this.container.find('.simple-iconfonts-picker');
 
 			picker.on('simple-iconfonts-picker:update', function() {
 				control.setting.set({
-					type: control.container.find( 'input.simple-iconfonts-picker-type' ).val(),
-					icon: control.container.find( 'input.simple-iconfonts-picker-icon' ).val(),
+					type: control.container.find('input.simple-iconfonts-picker-type').val(),
+					icon: control.container.find('input.simple-iconfonts-picker-icon').val(),
 				});
 			});
 		}
