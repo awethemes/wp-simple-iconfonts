@@ -1,7 +1,7 @@
 === WP Simple Iconfonts ===
 Contributors: awethemes, anhskohbo
 Donate link: http://awethemes.com/
-Tags: menu, icon, icons, icon-fonts, sprites, fontawesome, font-awesome, dashicons, icomoon, fontello, iconpicker, icon-picker
+Tags: menu, icon, icons, icon-fonts, sprites, fontawesome, font-awesome, dashicons, icomoon, fontello, iconpicker, icon-picker, acf, cmb2, reduxframework
 Requires at least: 4.4
 Tested up to: 4.8.1
 Stable tag: 0.2.0
@@ -54,6 +54,9 @@ Check [this official document](http://docs.awethemes.com/wp-simple-iconfonts/int
 3. Icon picker
 
 == Changelog ==
+
+= 0.2.x =
+* Added: ReduxFramework icon picker field.
 
 = 0.2.0 =
 * Added: Integrated with ACF & CMB2, now you can use `simple_icon` type for picker icon.

@@ -19,7 +19,7 @@ TODO Support:
 TODO:
 	✔	Use own picker controller (Need more code) @done (17-08-14 18:07)
 	✔	Allow upload "custom-format" icon pack. @done (17-08-15 11:30)
-	☐	Make register icon can be deactive, active.
+	✘	Make register icon can be deactive, active. @cancelled (17-08-18 06:30)
 	☐	Write unit-tests
 
 TODO Support Framework/Metabox:
@@ -28,8 +28,8 @@ TODO Support Framework/Metabox:
 	✔	https://wordpress.org/plugins/advanced-custom-fields/ @done (17-08-17 00:23)
 	✔	https://wordpress.org/plugins/kirki/ @done (17-08-18 06:12)
 	✔	https://wordpress.org/plugins/redux-framework/ @done (17-08-17 18:38)
-	☐	https://wordpress.org/plugins/titan-framework/
+	✔	https://wordpress.org/plugins/titan-framework/ @done (17-08-18 07:30)
+	✔	https://github.com/humanmade/Custom-Meta-Boxes @done (17-08-18 08:04)
 	☐	https://wordpress.org/plugins/meta-box/
-	☐	https://github.com/humanmade/Custom-Meta-Boxes
 	☐	https://github.com/valendesigns/option-tree
 	☐	https://github.com/devinsays/options-framework-plugin/
