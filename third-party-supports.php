@@ -109,3 +109,13 @@ if ( defined( 'RWMB_VER' ) ) {
 	}
 	add_action( 'init', 'wp_simple_iconfonts_support_metabox_io', 1 );
 }
+
+if ( defined( 'WPB_VC_VERSION' ) ) {
+	/**
+	 * Support Visual Composer.
+	 */
+	function wp_simple_iconfonts_support_js_composer() {
+		new WP_Simple_Iconfonts\Support\JS_Composer_Simple_Iconfonts_Param;
+	}
+	add_action( 'vc_after_init', 'wp_simple_iconfonts_support_js_composer' );
+}

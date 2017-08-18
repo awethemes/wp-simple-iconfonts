@@ -189,3 +189,11 @@ if ( class_exists('TitanFramework') ) {
 		) );
 	});
 }
+
+if ( function_exists( 'vc_add_param')) {
+	vc_add_param('vc_column', array(
+		"type"       => "simple_iconfonts",
+		"heading"    => "Icon",
+		"param_name" => "fdsfdsfd",
+	));
+}
