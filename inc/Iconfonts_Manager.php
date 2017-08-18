@@ -1,7 +1,7 @@
 <?php
 namespace WP_Simple_Iconfonts;
 
-class Admin_Page {
+class Iconfonts_Manager {
 	/**
 	 * Iconfonts object instance.
 	 *
@@ -84,8 +84,8 @@ class Admin_Page {
 		/**
 		 * Hook wp_simple_iconfonts_before_install_iconpack
 		 *
-		 * @param array           $upload_result  Upload result array.
-		 * @param Admin_Page $this                Instance of this class.
+		 * @param array             $upload_result  Upload result array.
+		 * @param Iconfonts_Manager $this           Instance of this class.
 		 */
 		do_action( 'wp_simple_iconfonts_before_install_iconpack', $upload_result, $this );
 
@@ -98,7 +98,7 @@ class Admin_Page {
 		 *
 		 * @param array              $upload_result  Upload result array.
 		 * @param Icon_Pack|WP_Error $installed_icon Installed icon result.
-		 * @param Admin_Page         $this           Instance of this class.
+		 * @param Iconfonts_Manager  $this           Instance of this class.
 		 */
 		do_action( 'wp_simple_iconfonts_after_install_iconpack', $upload_result, $installed_icon, $this );
 
@@ -111,8 +111,8 @@ class Admin_Page {
 		/**
 		 * Hook wp_simple_iconfonts_installed_iconpack
 		 *
-		 * @param Icon_Pack  $installed_icon Installed icon model class.
-		 * @param Admin_Page $this           Instance of this class.
+		 * @param Icon_Pack         $installed_icon Installed icon model class.
+		 * @param Iconfonts_Manager $this           Instance of this class.
 		 */
 		do_action( 'wp_simple_iconfonts_installed_iconpack', $installed_icon, $this );
 	}

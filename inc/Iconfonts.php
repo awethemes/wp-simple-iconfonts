@@ -436,7 +436,7 @@ final class Iconfonts {
 			esc_html__( 'Icon Fonts', 'wp_simple_iconfonts' ),
 			'manage_options',
 			'wp-simple-iconfonts',
-			array( new Admin_Page( $this ), 'output' )
+			array( new Iconfonts_Manager( $this ), 'output' )
 		);
 
 		add_action( 'load-' . $hook_suffix, function() {
