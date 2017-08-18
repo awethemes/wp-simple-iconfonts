@@ -4,7 +4,7 @@ Donate link: http://awethemes.com/
 Tags: menu, icon, icons, icon-fonts, sprites, fontawesome, font-awesome, dashicons, icomoon, fontello, iconpicker, icon-picker, acf, cmb2, reduxframework
 Requires at least: 4.4
 Tested up to: 4.8.1
-Stable tag: 0.2.0
+Stable tag: 0.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
