@@ -27,22 +27,17 @@ if ( class_exists( 'Kirki' ) ) {
 
 add_filter( 'rwmb_meta_boxes', function ( $meta_boxes ) {
 	$meta_boxes[] = [
-		'title'  => 'Existing fields',
+		'title'  => 'Metabox.io',
 		'fields' => [
 			[
-				'name' => 'oEmbed',
-				'id'   => 'oembed',
+				'name' => 'Icon',
+				'id'   => '__icon__',
 				'type' => 'simple_iconfonts',
-				'options' => array(
-					'name'    => __( 'Name', 'your-prefix' ),
-					'address' => __( 'Address', 'your-prefix' ),
-					'email'   => __( 'Email', 'your-prefix' ),
-				),
 			],
 		],
 	];
 
-	return [];
+	return $meta_boxes;
 } );
 
 function cmb2_text_email_metabox() {
