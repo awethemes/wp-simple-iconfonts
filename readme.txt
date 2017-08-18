@@ -55,8 +55,16 @@ Check [this official document](http://docs.awethemes.com/wp-simple-iconfonts/int
 
 == Changelog ==
 
-= 0.2.x =
-* Added: ReduxFramework icon picker field.
+= 0.2.1 (2017-08-18) =
+* Changed: Change picker type `simple_icon` to `simple_iconfonts`.
+* Added: Support WP Customizer,
+[Kirki](https://wordpress.org/plugins/kirki/),
+[ReduxFramework](https://wordpress.org/plugins/redux-framework/),
+[TitanFramework](https://wordpress.org/plugins/titan-framework/),
+[CMB](https://github.com/humanmade/Custom-Meta-Boxes),
+[Metabox](https://wordpress.org/plugins/meta-box/)
+for icon picker field.
+* Fixed: Minor bugs fixed.
 
 = 0.2.0 =
 * Added: Integrated with ACF & CMB2, now you can use `simple_icon` type for picker icon.
