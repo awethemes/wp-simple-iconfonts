@@ -1,32 +1,49 @@
 # WP Simple Iconfonts
 
-A dead simple, icon fonts for WordPress
+An icon fonts manager and picker for WordPress
 
 ![screenshot-2](https://user-images.githubusercontent.com/1529454/29360253-4eee5578-82ac-11e7-97b3-65858d152b2b.png)
 
 ## Introduction
 
-This plugin born with simple idea, let you create and manager whatever icon fonts
-you want in your site. Integration with other option-framework/metabox-framework, etc... 
-to pick icon.
+If you looking for an icon picker, this's last choice your need.
 
-- Fontello (http://fontello.com)
-- Icomoon (https://icomoon.io/app)
-- Font Awesome (http://fontawesome.io)
-- Foundation Icon Fonts 3 (http://zurb.com/playground/foundation-icon-fonts-3)
-- Ionicons (http://ionicons.com)
-- Elusive (http://elusiveicons.com)
-- PaymentFont (http://paymentfont.io)
-- Pixeden (http://www.pixeden.com/icon-fonts)
-- Themify Icons (https://themify.me/themify-icons)
-- Typicons (http://typicons.com)
-- Map Icons (http://map-icons.com)
+### Features
 
-Official documentation is [located here.](http://docs.awethemes.com/wp-simple-iconfonts/)
+- Allow you import/register **unlimit icon fonts** in to your site and manager them.
+- Provider a picker-icon, integrated with almost popular WordPress plugins, frameworks, etc...
+- Fluent API, easy use for other.
+
+### Links
+
+- [WordPress Plugin](https://wordpress.org/plugins/wp-simple-iconfonts/)
+- [Official documentation](http://docs.awethemes.com/wp-simple-iconfonts/)
 
 ## Integration
 
-If you need show icon-picker, just add this in to your form control:
+### Icon-picker
+
+WP Simple Iconfonts supports almost popular WP framework, metabox... just use a `'type' => 'simple_iconfonts'`
+to display icon picker field.
+
+List currently support icon-picker field/control:
+
+- [x] WP Customizer
+- [x] [CMB2](https://wordpress.org/plugins/cmb2/)
+- [x] [ACF](https://wordpress.org/plugins/advanced-custom-fields/)
+- [x] [Kirki](https://wordpress.org/plugins/kirki/)
+- [x] [Redux Framework](https://wordpress.org/plugins/redux-framework/)
+- [x] [Titan Framework](https://wordpress.org/plugins/titan-framework/)
+- [x] [CMB by humanmade](https://github.com/humanmade/Custom-Meta-Boxes)
+- [x] [Metabox](https://wordpress.org/plugins/meta-box/)
+- [ ] Visual Composer
+- [ ] https://github.com/valendesigns/option-tree
+- [ ] https://github.com/devinsays/options-framework-plugin
+- [ ] https://github.com/Codestar/codestar-framework
+
+See the [example](https://github.com/awethemes/wp-simple-iconfonts/blob/master/tests/_integration.php) to see how it works.
+
+We also have a function to display picker field, checkout this example:
 
 ```php
 <?php
@@ -42,7 +59,6 @@ wp_simple_iconfonts_field( array(
 	'name'  => '_simple_icon',
 	'value' => $values
 ) );
-
 ```
 
 ## How I add my icon pack in PHP?
@@ -95,3 +111,17 @@ function register_new_icons( $iconfonts ) {
 }
 add_action( 'wp_simple_iconfonts', 'register_new_icons' );
 ```
+
+## Supports
+
+- Fontello (http://fontello.com)
+- Icomoon (https://icomoon.io/app)
+- Font Awesome (http://fontawesome.io)
+- Foundation Icon Fonts 3 (http://zurb.com/playground/foundation-icon-fonts-3)
+- Ionicons (http://ionicons.com)
+- Elusive (http://elusiveicons.com)
+- PaymentFont (http://paymentfont.io)
+- Pixeden (http://www.pixeden.com/icon-fonts)
+- Themify Icons (https://themify.me/themify-icons)
+- Typicons (http://typicons.com)
+- Map Icons (http://map-icons.com)
