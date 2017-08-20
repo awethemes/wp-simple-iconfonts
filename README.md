@@ -36,7 +36,7 @@ List currently support icon-picker field/control:
 - [x] [Titan Framework](https://wordpress.org/plugins/titan-framework/)
 - [x] [CMB by humanmade](https://github.com/humanmade/Custom-Meta-Boxes)
 - [x] [Metabox](https://wordpress.org/plugins/meta-box/)
-- [ ] Visual Composer
+- [x] Visual Composer
 - [ ] https://github.com/valendesigns/option-tree
 - [ ] https://github.com/devinsays/options-framework-plugin
 - [ ] https://github.com/Codestar/codestar-framework
