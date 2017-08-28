@@ -17,32 +17,48 @@ msgstr ""
 msgid "WP Simple Iconfonts requires at least PHP version 5.3.9 to works, you are running version %s. Please contact to your administrator to upgrade PHP version!"
 msgstr ""
 
-#: inc/Admin_Page.php:108
-msgid "Install new icon successfully"
-msgstr ""
-
-#: inc/Admin_Page.php:225
-msgid "Before you can upload your icon, you will need to fix the following error:"
-msgstr ""
-
-#: inc/Admin_Page.php:291
-msgid "This icon pack will be lost in your system. Are you sure want to do this?"
-msgstr ""
-
-#: inc/Iconfonts.php:402
-msgid "Icon Picker"
-msgstr ""
-
-#: inc/Iconfonts.php:403
-msgid "All"
-msgstr ""
-
-#: inc/Iconfonts.php:404
+#: inc/functions.php:35, inc/Iconfonts.php:422
 msgid "Select Icon"
 msgstr ""
 
-#: inc/Iconfonts.php:417, inc/Iconfonts.php:418
+#: inc/functions.php:36
+msgid "Remove"
+msgstr ""
+
+#: inc/Iconfonts.php:384
+msgid "This icon pack will be lost in your system. Are you sure want to do this?"
+msgstr ""
+
+#: inc/Iconfonts.php:420, inc/Support/ACF_Simple_Iconfonts_Field.php:10
+msgid "Icon Picker"
+msgstr ""
+
+#: inc/Iconfonts.php:421
+msgid "All"
+msgstr ""
+
+#: inc/Iconfonts.php:435, inc/Iconfonts.php:436
 msgid "Icon Fonts"
+msgstr ""
+
+#: inc/Iconfonts.php:474
+msgid "Documentation"
+msgstr ""
+
+#: inc/Iconfonts.php:479
+msgid "GitHub Repo"
+msgstr ""
+
+#: inc/Iconfonts.php:484
+msgid "Issue Tracker"
+msgstr ""
+
+#: inc/Iconfonts_Manager.php:108
+msgid "Install new icon successfully"
+msgstr ""
+
+#: inc/Iconfonts_Manager.php:225
+msgid "Before you can upload your icon, you will need to fix the following error:"
 msgstr ""
 
 #: inc/Installer.php:37
@@ -67,6 +83,10 @@ msgstr ""
 
 #: inc/Extractor/Extractor.php:120
 msgid "Invalid icon pack data."
+msgstr ""
+
+#: inc/Support/ACF_Simple_Iconfonts_Field.php:55
+msgid "Default Icon"
 msgstr ""
 
 #: inc/Support/Nav_Menu_Icon.php:103
@@ -101,10 +121,6 @@ msgstr ""
 msgid "Upload Icon Pack"
 msgstr ""
 
-#: inc/views/html-main.php:31
-msgid "No icon pack found."
-msgstr ""
-
 #: inc/views/html-upload-form.php:15
 msgid "Dismiss the upload form"
 msgstr ""
@@ -127,4 +143,20 @@ msgstr ""
 
 #: inc/views/html-upload-form.php:28
 msgid "Install Now"
+msgstr ""
+
+#: inc/views/shortcode-media-template.php:2
+msgid "Settings"
+msgstr ""
+
+#: inc/views/shortcode-media-template.php:5
+msgid "Font size"
+msgstr ""
+
+#: inc/views/shortcode-media-template.php:11
+msgid "Font weight"
+msgstr ""
+
+#: inc/views/shortcode-media-template.php:16
+msgid "Color"
 msgstr ""

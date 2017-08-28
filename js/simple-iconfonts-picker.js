@@ -2,14 +2,12 @@
 	'use strict';
 
 	var BaseIconPicker = wp.media.view.MediaFrame.IconPicker;
+	var Select = wp.media.view.MediaFrame.Select;
 
 	wp.media.controller.IconPickerSimpleImage = wp.media.controller.IconPickerImg.extend();
 	wp.media.controller.IconPickerSimpleIconpack = wp.media.controller.IconPickerFont.extend();
 
-	var l10n = wp.media.view.l10n,
-		Select = wp.media.view.MediaFrame.Select;
-
-	var SimpleIconPicker = BaseIconPicker.extend({
+	wp.media.controller.SimpleIconPicker = BaseIconPicker.extend({
 		initialize: function() {
 			_.defaults( this.options, {
 				title:       '',
@@ -31,12 +29,13 @@
 
 	$(function() {
 		var l10n = wp.media.view.l10n.iconPicker,
+			IconPicker = wp.media.controller.SimpleIconPicker,
 			templates = {},
 			frame, selectIcon, removeIcon, getFrame, updateField, updatePreview, $field;
 
 		getFrame = function() {
 			if ( ! frame ) {
-				frame = new SimpleIconPicker();
+				frame = new IconPicker;
 				frame.target.on( 'change', updateField );
 			}
 
