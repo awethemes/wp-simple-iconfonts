@@ -55,6 +55,7 @@ if ( ! class_exists( 'WP_Simple_Iconfonts\\Iconfonts' ) ) :
 
 	// Init the supports.
 	WP_Simple_Iconfonts\Support\Nav_Menu_Icon::instance();
+	WP_Simple_Iconfonts\Support\Shortcode_Icon::instance();
 
 	// Third party supports.
 	require_once trailingslashit( __DIR__ ) . 'third-party-supports.php';

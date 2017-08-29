@@ -54,7 +54,7 @@ gulp.task('scss', function() {
  */
 gulp.task('watch', function () {
   browserSync.init({
-    files: ['{inc}/**/*.php', '*.php'],
+    files: ['{inc}/**/*.php', '*.php', 'js/*.js'],
     proxy: 'awebooking.dev',
     snippetOptions: {
       whitelist: ['/wp-admin/admin-ajax.php'],
