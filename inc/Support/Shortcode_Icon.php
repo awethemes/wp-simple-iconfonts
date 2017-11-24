@@ -26,18 +26,22 @@ class Shortcode_Icon {
 	 * Constructor.
 	 */
 	private function __construct() {
+		add_shortcode( 'wp_simple_iconfonts', array( $this, 'output_shortcode' ) );
+
+		add_action( 'wp_enqueue_editor', array( $this, 'wp_enqueue_editor' ) );
 		add_filter( 'mce_external_plugins', array( $this, 'enqueue_editor_scripts' ) );
 		add_filter( 'mce_buttons', array( $this, 'register_buttons_editor' ) );
-		add_action( 'wp_enqueue_editor', array( $this, 'wp_enqueue_editor' ) );
-		add_action( 'print_media_templates', array( $this, '_media_templates' ) );
-		add_shortcode( 'wp_simple_iconfonts', array( $this, 'add_editor_shortcode' ) );
+		add_action( 'print_media_templates', array( $this, 'print_media_templates' ) );
 	}
 
 	/**
 	 * Enqueue scripts.
+	 *
+	 * @access private
 	 */
 	public function wp_enqueue_editor() {
 		wp_enqueue_media();
+
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'wp-color-picker' );
 		wp_enqueue_style( 'simple-iconfonts-picker' );
@@ -51,12 +55,14 @@ class Shortcode_Icon {
 	/**
 	 * Enqueue editor scripts.
 	 *
-	 * @param  array $plugin_array plugin_array
+	 * @param  array $plugin_array The plugin array.
 	 * @return array
+	 *
+	 * @access private
 	 */
 	public function enqueue_editor_scripts( $plugin_array ) {
 		// Enqueue TinyMCE plugin script with its ID.
-		$plugin_array['wp_simple_icons_button'] = plugin_dir_url( WP_SIMPLE_ICONFONTS_PATH ) . '/js/simple-iconfonts-editor.js';
+		$plugin_array['wp_simple_icons_button'] = wp_simple_iconfonts()->get_plugin_url( 'js/simple-iconfonts-editor.js' );
 
 		return $plugin_array;
 	}
@@ -66,19 +72,23 @@ class Shortcode_Icon {
 	 *
 	 * @param  array $buttons buttons.
 	 * @return array
+	 *
+	 * @access private
 	 */
 	public function register_buttons_editor( $buttons ) {
 		// Register buttons with their id.
 		array_push( $buttons, 'wp_simple_icons_button' );
+
 		return $buttons;
 	}
 
 	/**
 	 * Get and print media templates from all types
 	 *
+	 * @access private
 	 */
-	public function _media_templates() {
-		include plugin_dir_path( __DIR__ ) . 'views/shortcode-media-template.php';
+	public function print_media_templates() {
+		include trailingslashit( __DIR__ ) . '/../views/shortcode-media-template.php';
 	}
 
 	/**
@@ -86,7 +96,7 @@ class Shortcode_Icon {
 	 *
 	 * @param array $atts atts.
 	 */
-	public function add_editor_shortcode( $atts ) {
+	public function output_shortcode( $atts ) {
 		$atts = shortcode_atts( array(
 			'type'        => '',
 			'icon'        => '',
