@@ -1,0 +1,16 @@
+{
+	"name": "awethemes/wp-simple-iconfonts",
+	"type": "wordpress-plugin",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Nguyen Van Anh",
+			"email": "anhskohbo@gmail.com"
+		}
+	],
+	"minimum-stability": "stable",
+	"require": {
+		"php": ">=5.4.0",
+		"symfony/polyfill-mbstring": "^1.6"
+	}
+}

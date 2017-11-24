@@ -2,6 +2,7 @@
 namespace WP_Simple_Iconfonts;
 
 use WP_Error;
+use DOMDocument;
 use FilesystemIterator;
 use RecursiveIteratorIterator;
 use RecursiveDirectoryIterator;
@@ -93,5 +94,86 @@ class Utils {
 		}
 
 		return $wp_filesystem;
+	}
+
+	/**
+	 * Extract glyph icons from SVG-fonts file.
+	 *
+	 * @param  string $svg_path The SVG file path.
+	 * @param  string $charset  The DOMDocument load charset.
+	 * @param  int    $options  The DOMDocument load options.
+	 * @return array|null
+	 */
+	public static function glyph_extract( $svg_path, $charset = 'UTF-8', $options = LIBXML_NONET ) {
+		if ( ! is_file( $svg_path ) || ! is_readable( $svg_path ) ) {
+			return;
+		}
+
+		$internal_errors = libxml_use_internal_errors( true );
+		$disable_entities = libxml_disable_entity_loader( true );
+
+		$dom = new DOMDocument( '1.0', $charset );
+		$dom->validateOnParse = true; // @codingStandardsIgnoreLine
+
+		$contents = @file_get_contents( $svg_path );
+		if ( '' !== trim( $contents ) ) {
+			@$dom->loadXML( $contents, $options );
+		}
+
+		libxml_use_internal_errors( $internal_errors );
+		libxml_disable_entity_loader( $disable_entities );
+
+		$fontspec = $dom->getElementsByTagName( 'font' )->item( 0 );
+		$fontface = $dom->getElementsByTagName( 'font-face' )->item( 0 );
+
+		$default_char_width  = $fontspec->getAttribute( 'horiz-adv-x' );
+		$default_char_height = $fontface->getAttribute( 'units-per-em' );
+		$default_char_ascent = $fontface->getAttribute( 'ascent' );
+
+		$glyphs = $dom->getElementsByTagName( 'glyph' );
+		$data_on_glyphs = [];
+
+		foreach ( $glyphs as $glyph ) {
+			$icon_code  = $glyph->getAttribute( 'unicode' );
+
+			// Some glyphs matched without a unicode value so we should ignore them.
+			if ( empty( $icon_code ) ) {
+				continue;
+			}
+
+			// Get unicode hex representation of a unicode character.
+			// @thanks https://github.com/madeyourday/SVG-Icon-Font-Generator/blob/v0.1.3/src/MadeYourDay/SVG/IconFontGenerator.php#L247 .
+			if ( ! is_string( $icon_code ) || mb_strlen( $icon_code, 'utf-8' ) === 1 ) {
+				$unicode = unpack( 'N', mb_convert_encoding( $icon_code, 'UCS-4BE', 'UTF-8' ) );
+				$icon_code = dechex( $unicode[1] );
+			}
+
+			// Remove "'&#x" from begin in some case.
+			if ( 0 === mb_strpos( $icon_code, '&#x' ) ) {
+				$icon_code = mb_substr( $icon_code, 0, 3 );
+			}
+
+			// Continue extract data.
+			$path_data  = $glyph->getAttribute( 'd' );
+			$glyph_name = $glyph->getAttribute( 'glyph-name' );
+
+			$translate_offset = $default_char_ascent;
+			$custom_width_match = $glyph->getAttribute( 'horiz-adv-x' );
+			$content_width = $custom_width_match ? $custom_width_match : $default_char_width;
+
+			// Skip empty-looking glyphs.
+			if ( empty( $icon_code ) || empty( $path_data ) || strlen( $path_data ) < 10 ) {
+				continue;
+			}
+
+			$data_on_glyphs[] = array(
+				'code' => $icon_code,
+				'path' => $path_data,
+				'name' => $glyph_name ? $glyph_name : $icon_code,
+				'svg'  => "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 ${content_width} ${default_char_height}\"><g transform=\"scale(1,-1) translate(0 -${translate_offset})\"><path d=\"${path_data}\"/></g></svg>",
+			);
+		}
+
+		return $data_on_glyphs;
 	}
 }
