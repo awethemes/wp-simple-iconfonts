@@ -57,7 +57,7 @@ class Nav_Menu_Icon {
 			return $title;
 		}
 
-		return "{$icon}{$title}";
+		return apply_filters( "wp_simple_iconfonts_menu_title", "{$icon}{$title}", $icon, $title, $id );
 	}
 
 	/**
