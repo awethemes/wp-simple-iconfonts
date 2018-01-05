@@ -126,6 +126,7 @@ class Utils {
 		$fontspec = $dom->getElementsByTagName( 'font' )->item( 0 );
 		$fontface = $dom->getElementsByTagName( 'font-face' )->item( 0 );
 
+		$svgid = strtolower( $fontspec->getAttribute( 'id' ) );
 		$default_char_width  = $fontspec->getAttribute( 'horiz-adv-x' );
 		$default_char_height = $fontface->getAttribute( 'units-per-em' );
 		$default_char_ascent = $fontface->getAttribute( 'ascent' );
@@ -167,10 +168,13 @@ class Utils {
 			}
 
 			$data_on_glyphs[] = array(
-				'code' => $icon_code,
-				'path' => $path_data,
-				'name' => $glyph_name ? $glyph_name : $icon_code,
-				'svg'  => "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 ${content_width} ${default_char_height}\"><g transform=\"scale(1,-1) translate(0 -${translate_offset})\"><path d=\"${path_data}\"/></g></svg>",
+				'id'    => "svg-{$svgid}-{$glyph_name}",
+				'name'  => $glyph_name ? $glyph_name : $icon_code,
+				'group' => '',
+				'code'  => $icon_code,
+				'path'  => $path_data,
+				'svg'   => "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 {$content_width} {$default_char_height}\"><g transform=\"scale(1,-1) translate(0 -{$translate_offset})\"><path d=\"{$path_data}\"/></g></svg>",
+				'svg_symbol' => "<symbol id=\"svg-{$svgid}-{$glyph_name}\" viewBox=\"0 0 {$content_width} {$default_char_height}\"><g transform=\"scale(1,-1) translate(0 -{$translate_offset})\"><path d=\"{$path_data}\"/></g></symbol>",
 			);
 		}
 
