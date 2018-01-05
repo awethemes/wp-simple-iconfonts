@@ -1,4 +1,4 @@
-# Copyright (C) 2017 WP_Simple_Iconfonts
+# Copyright (C) 2018 WP_Simple_Iconfonts
 # This file is distributed under the same license as the WP_Simple_Iconfonts package.
 msgid ""
 msgstr ""
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: wp-simple-iconfonts.php:27
-msgid "WP Simple Iconfonts requires at least PHP version 5.3.9 to works, you are running version %s. Please contact to your administrator to upgrade PHP version!"
+msgid "WP Simple Iconfonts requires at least PHP version 5.4.0 to works, you are running version %s. Please contact to your administrator to upgrade PHP version!"
 msgstr ""
 
 #: inc/functions.php:35, inc/Iconfonts.php:422
@@ -69,7 +69,7 @@ msgstr ""
 msgid "The icon pack \"%s\" has been exists."
 msgstr ""
 
-#: inc/Utils.php:72
+#: inc/Utils.php:73
 msgid "Incompatible archive"
 msgstr ""
 
@@ -149,14 +149,14 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: inc/views/shortcode-media-template.php:5
+#: inc/views/shortcode-media-template.php:6
 msgid "Font size"
 msgstr ""
 
-#: inc/views/shortcode-media-template.php:11
+#: inc/views/shortcode-media-template.php:12
 msgid "Font weight"
 msgstr ""
 
-#: inc/views/shortcode-media-template.php:16
+#: inc/views/shortcode-media-template.php:17
 msgid "Color"
 msgstr ""
