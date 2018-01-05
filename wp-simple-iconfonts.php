@@ -65,5 +65,3 @@ if ( ! class_exists( 'WP_Simple_Iconfonts\\Iconfonts' ) ) :
 	// Third party supports.
 	require_once trailingslashit( __DIR__ ) . 'third-party-supports.php';
 endif;
-
-include 'tests/_integration.php';
