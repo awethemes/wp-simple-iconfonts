@@ -43,8 +43,11 @@ class Utils {
 	 * @param  flags  $flags     RecursiveDirectoryIterator flags searching.
 	 * @return RecursiveIteratorIterator
 	 */
-	public static function scandir( $directory, $flags = FilesystemIterator::KEY_AS_PATHNAME | FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::SKIP_DOTS ) {
+	public static function scandir( $directory, $flags = null ) {
+		$flags = ! is_null( $flags ) ? $flags : FilesystemIterator::KEY_AS_PATHNAME | FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::SKIP_DOTS;
+
 		$iterator = new RecursiveDirectoryIterator( $directory, $flags );
+
 		return new RecursiveIteratorIterator( $iterator, RecursiveIteratorIterator::SELF_FIRST );
 	}
 
