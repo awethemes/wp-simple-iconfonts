@@ -84,6 +84,13 @@ class Result {
 		}
 	}
 
+	/**
+	 * Add a icon to result.
+	 *
+	 * @param string $id    The icon ID.
+	 * @param string $name  The icon name.
+	 * @param string $group The icon group.
+	 */
 	public function add_icon( $id, $name, $group = '' ) {
 		if ( empty( $id ) ) {
 			return;
@@ -100,10 +107,10 @@ class Result {
 	}
 
 	/**
-	 * ..
+	 * Copy result to a destination path.
 	 *
-	 * @param  [type] $dest
-	 * @return [type]       [description]
+	 * @param  string $base Base path.
+	 * @return void
 	 */
 	public function destination( $base ) {
 		$destination = trailingslashit( $base ) . $this->id . '/';
@@ -118,18 +125,37 @@ class Result {
 		}
 
 		// Move fonts to new folder.
-		foreach ( $this->font_paths as $path ) {
-			if ( $this->extractor instanceof Editable ) {
-				copy( $path, $destination . 'fonts/' . $this->id . '.' . pathinfo( $path, PATHINFO_EXTENSION ) );
-			} else {
-				copy( $path, $destination . 'fonts/' . basename( $path ) );
-			}
+		foreach ( $this->font_paths as $font_path ) {
+			$this->perform_copy_font( $font_path, $destination );
 		}
 
 		// Write style.css, icons.json.
 		file_put_contents( $destination . 'style.css', $this->get_rewrite_stylesheet() );
 		file_put_contents( $destination . 'metadata.json', json_encode( $this->to_array() ) . "\n" );
 		file_put_contents( $destination . 'index.php', "<?php\n// Silence is golden.\n" );
+	}
+
+	/**
+	 * Perform copy font from source to the destination.
+	 *
+	 * @param  string $source      The font source path.
+	 * @param  string $destination The base destination.
+	 * @return void
+	 */
+	protected function perform_copy_font( $source, $destination ) {
+		if ( is_array( $source ) ) {
+			foreach ( $source as $font_path ) {
+				$this->perform_copy_font( $font_path, $destination );
+			}
+
+			return;
+		}
+
+		if ( $this->extractor instanceof Editable ) {
+			copy( $source, $destination . 'fonts/' . $this->id . '.' . pathinfo( $source, PATHINFO_EXTENSION ) );
+		} else {
+			copy( $source, $destination . 'fonts/' . basename( $source ) );
+		}
 	}
 
 	/**
@@ -170,6 +196,11 @@ class Result {
 		$stylesheet = preg_replace( '/url\(([\'"])?/', 'url($1::', $stylesheet ); // ...
 		$stylesheet = preg_replace( '/\.\.?\/|fonts?\//', '::', $stylesheet ); // Replace ..|fonts with temp string ::.
 		$stylesheet = preg_replace( '/[\:\:]{2,}+/', 'fonts/', $stylesheet ); // Replace `::` temp string with 'fonts/'.
+
+		// Call rewrite_stylesheet from extractor.
+		if ( method_exists( $this->extractor, 'rewrite_stylesheet' ) ) {
+			$stylesheet = $this->extractor->rewrite_stylesheet( $stylesheet );
+		}
 
 		if ( $this->extractor instanceof Editable ) {
 			// $stylesheet = Utils::minify_css( $stylesheet );
