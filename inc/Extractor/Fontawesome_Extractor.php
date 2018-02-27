@@ -2,7 +2,7 @@
 namespace WP_Simple_Iconfonts\Extractor;
 
 /**
- * FontAwesome extractor provider.
+ * FontAwesome (4) extractor provider.
  *
  * @link http://fontawesome.io
  */

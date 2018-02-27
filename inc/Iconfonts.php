@@ -70,6 +70,7 @@ final class Iconfonts {
 			'WP_Simple_Iconfonts\\Extractor\\Fontello_Extractor',
 			'WP_Simple_Iconfonts\\Extractor\\Icomoon_App_Extractor',
 			'WP_Simple_Iconfonts\\Extractor\\Fontawesome_Extractor',
+			'WP_Simple_Iconfonts\\Extractor\\Fontawesome5_Extractor',
 			'WP_Simple_Iconfonts\\Extractor\\Foundation_Extractor',
 			'WP_Simple_Iconfonts\\Extractor\\Ionicons_Extractor',
 			'WP_Simple_Iconfonts\\Extractor\\Elusive_Extractor',
