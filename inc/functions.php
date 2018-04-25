@@ -1,6 +1,14 @@
 <?php
 
 if ( ! function_exists( 'wp_simple_iconfonts_field' ) ) :
+	/**
+	 * Parse the image URL based on given type.
+	 *
+	 * @param  string $type The image type.
+	 * @param  int    $id   Attachment image ID.
+	 * @param  string $size Optional. Image size to retrieve.
+	 * @return string
+	 */
 	function wp_simple_iconfonts_get_icon_url( $type, $id, $size = 'thumbnail' ) {
 		$url = '';
 
@@ -17,6 +25,13 @@ if ( ! function_exists( 'wp_simple_iconfonts_field' ) ) :
 endif;
 
 if ( ! function_exists( 'wp_simple_iconfonts_field' ) ) :
+	/**
+	 * Display the icon picker.
+	 *
+	 * @param  array   $args Field args.
+	 * @param  boolean $echo Is echo or not.
+	 * @return string|void
+	 */
 	function wp_simple_iconfonts_field( $args, $echo = true ) {
 		$defaults = array(
 			'id'    => '',
