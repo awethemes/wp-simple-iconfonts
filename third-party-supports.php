@@ -8,19 +8,6 @@
  */
 
 /**
- * Support WP Customizer.
- *
- * @param  WP_Customize_Manager $wp_customize WP_Customize_Manager instance.
- * @return void
- */
-function wp_simple_iconfonts_support_customizer( $wp_customize ) {
-	if ( class_exists( 'Kirki' ) ) {
-		add_filter( 'kirki/control_types', 'wp_simple_iconfonts_support_kirki' );
-	}
-}
-add_action( 'customize_register', 'wp_simple_iconfonts_support_customizer' );
-
-/**
  * Support Kirki.
  *
  * @link https://wordpress.org/plugins/kirki/
@@ -34,13 +21,39 @@ function wp_simple_iconfonts_support_kirki( $controls ) {
 	return $controls;
 }
 
+/**
+ * Support WP Customizer.
+ *
+ * @param  WP_Customize_Manager $wp_customize WP_Customize_Manager instance.
+ * @return void
+ */
+function wp_simple_iconfonts_support_customizer( $wp_customize ) {
+	if ( class_exists( 'Kirki' ) ) {
+		add_filter( 'kirki/control_types', 'wp_simple_iconfonts_support_kirki' );
+	}
+}
+add_action( 'customize_register', 'wp_simple_iconfonts_support_customizer' );
+
 if ( class_exists( 'acf' ) ) {
 	/**
-	 * Support ACF.
+	 * Register the field in ACF (free version).
 	 *
-	 * @link https://wordpress.org/plugins/advanced-custom-fields/
+	 * @return void
 	 */
-	new WP_Simple_Iconfonts\Support\ACF_Simple_Iconfonts_Field;
+	function wp_simple_iconfonts_support_acf() {
+		new WP_Simple_Iconfonts\Support\ACF_Simple_Iconfonts_Field;
+	}
+	add_action( 'acf/register_fields', 'wp_simple_iconfonts_support_acf' );
+
+	/**
+	 * Register the field in ACF v5 (pro version).
+	 *
+	 * @return void
+	 */
+	function wp_simple_iconfonts_support_acf5() {
+		new WP_Simple_Iconfonts\Support\ACF5_Simple_Iconfonts_Field;
+	}
+	add_action( 'acf/include_field_types', 'wp_simple_iconfonts_support_acf5' );
 }
 
 if ( defined( 'CMB2_LOADED' ) ) {

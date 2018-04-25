@@ -6,8 +6,10 @@ class ACF_Simple_Iconfonts_Field extends \acf_field {
 	 * Constructor the field.
 	 */
 	public function __construct() {
-		$this->name     = 'simple_iconfonts';
-		$this->label    = esc_html__( 'Icon Picker', 'wp_simple_iconfonts' );
+		$this->name = 'simple_iconfonts';
+
+		$this->label = esc_html__( 'Icon Picker', 'wp_simple_iconfonts' );
+
 		$this->defaults = array( 'default_icon' => '' );
 
 		parent::__construct();
@@ -44,7 +46,7 @@ class ACF_Simple_Iconfonts_Field extends \acf_field {
 	}
 
 	/**
-	 * Create extra options for your field.
+	 * Create extra options for this field.
 	 *
 	 * @param  array $field An array holding all the field's data.
 	 * @return void
@@ -65,7 +67,8 @@ class ACF_Simple_Iconfonts_Field extends \acf_field {
 				'name'  => 'fields[' . esc_attr( $field['name'] ) . '][default_icon]',
 				'value' => $field['default_icon'],
 			));
-			?></td>
+			?>
+			</td>
 		</tr><?php
 	}
 
