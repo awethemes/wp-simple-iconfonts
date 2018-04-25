@@ -4,7 +4,7 @@ Donate link: http://awethemes.com/
 Tags: menu, icon, icons, icon-fonts, sprites, fontawesome, font-awesome, dashicons, icomoon, fontello, iconpicker, icon-picker, acf, cmb2, reduxframework
 Requires at least: 4.4
 Tested up to: 4.9.1
-Stable tag: 0.4.1
+Stable tag: 0.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -54,6 +54,8 @@ Check [this official document](http://docs.awethemes.com/wp-simple-iconfonts/int
 3. Icon picker
 
 == Changelog ==
+= 0.5.0 (2018-04-25) =
+* Added: Support ACF v5
 
 = 0.4.1 (2018-02-27) =
 * Added: Support Font Awesome 5 extract.
