@@ -69,7 +69,7 @@ class Fontello_Extractor extends Extractor {
 		$json = $result->get_metadata_contents();
 
 		// Checking valid metadata.
-		if ( ! isset( $json['name'] ) || empty( $json['glyphs'] ) ) {
+		if ( ! is_array( $json ) || ! isset( $json['name'] ) || empty( $json['glyphs'] ) ) {
 			return;
 		}
 

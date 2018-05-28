@@ -54,6 +54,7 @@ class JS_Composer_Simple_Iconfonts_Param {
 	 *
 	 * @param  array  $settings Array of param settings.
 	 * @param  string $value    Param value.
+	 * @return string
 	 */
 	public function display( $settings, $value ) {
 		if ( is_null( $value ) && isset( $settings['default'] ) ) {
@@ -62,8 +63,7 @@ class JS_Composer_Simple_Iconfonts_Param {
 
 		$raw_value = $value;
 
-		$value = vc_parse_multi_attribute( $value );
-		$value = wp_parse_args( $value, array(
+		$value = wp_parse_args( vc_parse_multi_attribute( $value ), array(
 			'type' => '',
 			'icon' => '',
 		));

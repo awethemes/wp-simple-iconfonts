@@ -36,7 +36,7 @@ abstract class Icomoon_Extractor extends Extractor {
 	 */
 	protected function doing_extract( Result $result ) {
 		$json = $result->get_metadata_contents();
-		if ( empty( $json['icons'] ) || empty( $json['preferences']['fontPref'] ) ) {
+		if ( ! is_array( $json ) || empty( $json['icons'] ) || empty( $json['preferences']['fontPref'] ) ) {
 			return;
 		}
 
@@ -51,6 +51,11 @@ abstract class Icomoon_Extractor extends Extractor {
 		}
 
 		$result->id = sanitize_key( $result->name );
+
+		/*if ( in_array( $result->id, ['icon', 'icon-font' ] ) ) {
+			$result->id = uniqid( 'iconmoon-', false );
+		}*/
+
 		$result->version = sprintf( '%s.%s',
 			isset( $fontpref['metadata']['majorVersion'] ) ? $fontpref['metadata']['majorVersion'] : 1,
 			isset( $fontpref['metadata']['minorVersion'] ) ? $fontpref['metadata']['minorVersion'] : 0

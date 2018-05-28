@@ -20,7 +20,7 @@ class CMB2_Simple_Iconfonts_Field {
 	/**
 	 * Display the field.
 	 *
-	 * @param  CMB2_Field  $field         CMB2 Field instance.
+	 * @param  \CMB2_Field $field         CMB2 Field instance.
 	 * @param  array|mixed $escaped_value Escaped value.
 	 * @return void
 	 */

@@ -28,7 +28,7 @@ class Simple_Iconfonts_Extractor extends Extractor {
 	protected function doing_extract( Result $result ) {
 		$json = $result->get_metadata_contents();
 
-		if ( empty( $json['id'] ) || empty( $json['icons'] ) ) {
+		if ( ! is_array( $json ) || empty( $json['id'] ) || empty( $json['icons'] ) ) {
 			return;
 		}
 
@@ -39,14 +39,14 @@ class Simple_Iconfonts_Extractor extends Extractor {
 
 		if ( ! empty( $json['groups'] ) && is_array( $json['groups'] ) ) {
 			foreach ( (array) $json['groups'] as $raw_group ) {
-				if ( isset( $raw_group['id'] ) && isset( $raw_group['name'] ) ) {
+				if ( isset( $raw_group['id'], $raw_group['name'] ) ) {
 					$result->groups[] = $raw_group;
 				}
 			}
 		}
 
 		foreach ( (array) $json['icons'] as $raw_icon ) {
-			if ( isset( $raw_icon['id'] ) && isset( $raw_icon['name'] ) ) {
+			if ( isset( $raw_icon['id'], $raw_icon['name'] ) ) {
 				$result->icons[] = $raw_icon;
 			}
 		}

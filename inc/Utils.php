@@ -40,7 +40,7 @@ class Utils {
 	 * Scan recursive a directory.
 	 *
 	 * @param  string $directory A real directory location.
-	 * @param  flags  $flags     RecursiveDirectoryIterator flags searching.
+	 * @param  mixed  $flags     RecursiveDirectoryIterator flags searching.
 	 * @return RecursiveIteratorIterator
 	 */
 	public static function scandir( $directory, $flags = null ) {
@@ -74,7 +74,9 @@ class Utils {
 
 		if ( count( $source_files ) === 0 ) {
 			return new WP_Error( 'incompatible_archive', esc_html__( 'Incompatible archive', 'wp_simple_iconfonts' ) );
-		} elseif ( 1 == count( $source_files ) && $filesystem->is_dir( $working_directory . $source_files[0] ) ) {
+		}
+
+		if ( 1 === count( $source_files ) && $filesystem->is_dir( $working_directory . $source_files[0] ) ) {
 			$directory = $working_directory . trailingslashit( $source_files[0] );
 		} else {
 			$directory = $working_directory;
@@ -86,7 +88,7 @@ class Utils {
 	/**
 	 * Initialized (if need) and return the Wordpress filesystem.
 	 *
-	 * @return WP_Filesystem_Base
+	 * @return \WP_Filesystem_Base
 	 */
 	public static function wp_filesystem() {
 		global $wp_filesystem;
@@ -109,7 +111,7 @@ class Utils {
 	 */
 	public static function glyph_extract( $svg_path, $charset = 'UTF-8', $options = LIBXML_NONET ) {
 		if ( ! is_file( $svg_path ) || ! is_readable( $svg_path ) ) {
-			return;
+			return null;
 		}
 
 		$internal_errors = libxml_use_internal_errors( true );

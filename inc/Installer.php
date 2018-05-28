@@ -27,7 +27,7 @@ class Installer {
 	 * @param  string  $directory         Source directory.
 	 * @param  string  $working_directory The directory we working on it.
 	 * @param  boolean $delete_after      Delete directory or working_directory after that.
-	 * @return Icon_Pack|WP_Error
+	 * @return Iconpack|WP_Error
 	 */
 	public function install( $directory, $working_directory = null, $delete_after = false ) {
 		$extractor = $this->guest_extractor( $directory );
@@ -56,17 +56,19 @@ class Installer {
 		$opt = is_array( $opt ) ? $opt : array();
 		$opt[ $result->id ] = true;
 
-		$this->iconfonts->register( new Imported_Iconpack( $result->id ) );
+		$this->iconfonts->register( $iconpack = new Imported_Iconpack( $result->id ) );
 		update_option( '_wp_simple_iconfonts', $opt );
 
 		$this->delete_directory( $delete_after, $directory, $working_directory );
+
+		return $iconpack;
 	}
 
 	/**
 	 * Install icon form zip file format.
 	 *
 	 * @param  string $zipfile Zipfile path.
-	 * @return Icon_Pack|WP_Error
+	 * @return Iconpack|WP_Error
 	 */
 	public function zip_install( $zipfile ) {
 		$unzip_result = Utils::unzip( $zipfile, $this->iconfonts->get_path( 'tmp_dir' ) );

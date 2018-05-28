@@ -76,7 +76,7 @@ abstract class Extractor {
 		$match = false;
 
 		foreach ( $this->directory_structure as $name ) {
-			if ( substr( $name, -1 ) == '/' ) {
+			if ( substr( $name, -1 ) === '/' ) {
 				$match = is_dir( $this->directory . $name );
 			} else {
 				$match = is_file( $this->directory . $name );

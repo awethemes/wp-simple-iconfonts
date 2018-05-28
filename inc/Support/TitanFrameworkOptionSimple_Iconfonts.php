@@ -39,9 +39,9 @@ class TitanFrameworkOptionSimple_Iconfonts extends TitanFrameworkOption {
 	/**
 	 * Display for theme customizer.
 	 *
-	 * @param WP_Customize             $wp_customize The customizer object.
-	 * @param TitanFrameworkCustomizer $section      The customizer section.
-	 * @param int                      $priority     The display priority of the control.
+	 * @param \WP_Customize_Manager     $wp_customize The customizer object.
+	 * @param \TitanFrameworkCustomizer $section      The customizer section.
+	 * @param int                       $priority     The display priority of the control.
 	 */
 	public function registerCustomizerControl( $wp_customize, $section, $priority = 1 ) {
 		$wp_customize->add_control( new WP_Simple_Iconfonts_Control( $wp_customize, $this->getID(), array(

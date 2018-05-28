@@ -57,7 +57,7 @@ class Nav_Menu_Icon {
 			return $title;
 		}
 
-		return apply_filters( "wp_simple_iconfonts_menu_title", "{$icon}{$title}", $icon, $title, $id );
+		return apply_filters( 'wp_simple_iconfonts_menu_title', "{$icon}{$title}", $icon, $title, $id );
 	}
 
 	/**
@@ -69,7 +69,7 @@ class Nav_Menu_Icon {
 	public function get_icon( $meta ) {
 		// Icon or icon type is not set.
 		if ( empty( $meta['type'] ) || empty( $meta['icon'] ) ) {
-			return;
+			return '';
 		}
 
 		if ( in_array( $meta['type'], array( 'image', 'svg' ) ) && is_numeric( $meta['icon'] ) ) {

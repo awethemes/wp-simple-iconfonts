@@ -39,7 +39,7 @@ class Ionicons_Extractor extends Extractor {
 		$result->name = 'Ionicons';
 
 		$json = $result->get_metadata_contents();
-		if ( empty( $json['build_hash'] ) || empty( $json['icons'] ) ) {
+		if ( ! is_array( $json ) || empty( $json['build_hash'] ) || empty( $json['icons'] ) ) {
 			return;
 		}
 

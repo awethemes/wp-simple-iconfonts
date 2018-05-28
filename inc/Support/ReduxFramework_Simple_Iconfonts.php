@@ -9,9 +9,9 @@ class ReduxFramework_Simple_Iconfonts {
 	/**
 	 * Field constructor.
 	 *
-	 * @param array          $field  An array field values.
-	 * @param mixed          $value  Field value.
-	 * @param ReduxFramework $parent Parent instance.
+	 * @param array           $field  An array field values.
+	 * @param mixed           $value  Field value.
+	 * @param \ReduxFramework $parent Parent instance.
 	 */
 	public function __construct( $field = array(), $value = '', $parent ) {
 		$this->parent = $parent;
