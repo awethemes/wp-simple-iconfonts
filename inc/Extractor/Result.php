@@ -1,8 +1,6 @@
 <?php
 namespace WP_Simple_Iconfonts\Extractor;
 
-use WP_Simple_Iconfonts\Utils;
-
 class Result {
 	/**
 	 * The Extractor instance.
@@ -35,21 +33,21 @@ class Result {
 	/**
 	 * Iconpack icons.
 	 *
-	 * @var string
+	 * @var array
 	 */
 	public $icons = array();
 
 	/**
 	 * Iconpack groups.
 	 *
-	 * @var string
+	 * @var array
 	 */
 	public $groups = array();
 
 	/**
 	 * An array store icon-font paths.
 	 *
-	 * @var string
+	 * @var array
 	 */
 	public $font_paths = array();
 
@@ -138,8 +136,8 @@ class Result {
 	/**
 	 * Perform copy font from source to the destination.
 	 *
-	 * @param  string $source      The font source path.
-	 * @param  string $destination The base destination.
+	 * @param  string|array $source      The font source path.
+	 * @param  string       $destination The base destination.
 	 * @return void
 	 */
 	protected function perform_copy_font( $source, $destination ) {
@@ -212,8 +210,10 @@ class Result {
 			}
 
 			// Never use prefix .icon for icon name.
-			$stylesheet = str_replace( 'icon-', $this->id . '-', $stylesheet );
 			$stylesheet = str_replace( array( '.icon {', 'i {' ), '[class^="' . $this->id . '-"], [class*=" ' . $this->id . '-"] {', $stylesheet );
+			$stylesheet = str_replace( '" icon-"', " \"{$this->id}-\"", $stylesheet );
+			$stylesheet = str_replace( '"icon-"', "\"{$this->id}-\"", $stylesheet );
+			$stylesheet = str_replace( '.icon-', ".{$this->id}-", $stylesheet );
 		}
 
 		// Return parser CSS with blank line at end.
