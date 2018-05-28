@@ -10,35 +10,35 @@ final class Iconfonts {
 	 *
 	 * @var array
 	 */
-	protected $iconpacks = array();
+	private $iconpacks = array();
 
 	/**
 	 * An array extractors supported.
 	 *
 	 * @var array
 	 */
-	protected $extractors = array();
+	private $extractors = array();
 
 	/**
 	 * An array of upload path, temp path, etc...
 	 *
 	 * @var array
 	 */
-	protected $paths = array();
+	private $paths = array();
 
 	/**
 	 * An array icons was imported.
 	 *
 	 * @var array
 	 */
-	protected $imported;
+	private $imported;
 
 	/**
 	 * Singleton class instance implementation.
 	 *
 	 * @var static
 	 */
-	protected static $instance;
+	private static $instance;
 
 	/**
 	 * Set the globally available instance of the container.
@@ -131,8 +131,9 @@ final class Iconfonts {
 	 */
 	public function get( $id, $force = false ) {
 		$id = ( $id instanceof Iconpack ) ? $id->id : $id;
+
 		if ( ! isset( $this->iconpacks[ $id ] ) ) {
-			return;
+			return null;
 		}
 
 		$iconpack = $this->iconpacks[ $id ];
@@ -164,8 +165,8 @@ final class Iconfonts {
 	/**
 	 * Get all iconpacks.
 	 *
-	 * @param bool $force Force get all icons, even in inactive.
-	 * @return array
+	 * @param  bool $force Force get all icons, even in inactive.
+	 * @return Iconpack[]
 	 */
 	public function all( $force = false ) {
 		if ( $force ) {
@@ -218,7 +219,7 @@ final class Iconfonts {
 	 * @param  Iconpack $icon Icon pack.
 	 * @return bool
 	 */
-	protected function is_valid_iconpack( Iconpack $icon ) {
+	private function is_valid_iconpack( Iconpack $icon ) {
 		if ( empty( $icon->id ) ) {
 			trigger_error( 'WP Simple Iconfonts: "ID" cannot be empty.' );
 			return false;
