@@ -3,7 +3,7 @@ namespace WP_Simple_Iconfonts;
 
 final class Iconfonts {
 	/* Constants */
-	const VERSION = '0.5.0';
+	const VERSION = '0.5.1';
 
 	/**
 	 * An array registerd icon packs.
