@@ -111,7 +111,7 @@ class Shortcode_Icon {
 		}
 
 		if ( 'svg' === $atts['type'] || 'image' === $atts['type'] ) {
-			echo wp_get_attachment_image( $atts['icon'] );
+			return wp_get_attachment_image( $atts['icon'] );
 		} else {
 			$css = '';
 			$css .= $atts['font_size'] ? 'font-size:' . $atts['font_size'] . 'px;' : '';
@@ -120,7 +120,7 @@ class Shortcode_Icon {
 
 			$css = $css ? 'style="' . $css . '"' : '';
 
-			printf( '<i class="%1$s %2$s" %3$s></i>', esc_attr( $atts['type'] ), esc_attr( $atts['icon'] ), $css ); // WPCS: xss ok.
+			sprintf( '<i class="%1$s %2$s" %3$s></i>', esc_attr( $atts['type'] ), esc_attr( $atts['icon'] ), $css ); // WPCS: xss ok.
 		}
 	}
 }
